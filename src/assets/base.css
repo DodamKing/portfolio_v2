@@ -1,0 +1,18 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* 기본 스타일 */
+:root {
+    --primary: #3B82F6;
+    --primary-dark: #2563EB;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    font-family: 'Inter', sans-serif;
+}
