@@ -10,9 +10,24 @@
                     class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
                     <!-- 이미지 섹션 - 클릭 가능 -->
                     <div class="relative overflow-hidden h-48 cursor-pointer" @click="showProjectDetails(project)">
+                        <!-- 이미지 -->
                         <img :src="project.image" :alt="project.title"
                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                         <div class="absolute inset-0 bg-black opacity-0 hover:opacity-20 transition-opacity"></div>
+
+                        <!-- 타입 뱃지 -->
+                        <div class="absolute top-3 left-3">
+                            <span :class="[
+                                'text-xs px-3 py-1.5 rounded-full font-medium',
+                                project.type === 'Work'
+                                    ? 'bg-blue-500 text-white'
+                                    : 'bg-purple-500 text-white'
+                            ]">
+                                {{ project.type }} Project
+                            </span>
+                        </div>
+                        
+                        <!-- 기간 -->
                         <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/50 to-transparent">
                             <span class="text-sm text-white">{{ project.period }}</span>
                         </div>
