@@ -26,7 +26,7 @@
                                 {{ project.type }} Project
                             </span>
                         </div>
-                        
+
                         <!-- 기간 -->
                         <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/50 to-transparent">
                             <span class="text-sm text-white">{{ project.period }}</span>
@@ -65,7 +65,7 @@
                                 자세히 보기
                             </button>
                             <div class="flex gap-3">
-                                <a v-if="project.demoLink" :href="project.demoLink" target="_blank"
+                                <a v-if="project.liveLink" :href="project.liveLink" target="_blank"
                                     class="text-sm px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors"
                                     @click.stop>
                                     <i class="fas fa-external-link-alt"></i>
@@ -112,18 +112,11 @@
                     </div>
 
                     <!-- 이미지 갤러리 -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                        <div v-for="(screenshot, index) in selectedProject.screenshots" :key="index"
-                            class="relative group cursor-pointer overflow-hidden rounded-lg"
-                            @click="openImageModal(screenshot)">
-                            <img :src="screenshot" :alt="`${selectedProject.title} screenshot ${index + 1}`"
-                                class="w-full h-48 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105" />
-                            <div
-                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <i class="fas fa-search-plus text-white text-2xl"></i>
-                            </div>
-                        </div>
-                    </div>
+                    <ImageSlider :images="selectedProject.screenshots" :title="selectedProject.title"
+                        v-model="currentImageIndex" @open-modal="openImageModal" />
+
+                    <ImageModal :is-open="isImageModalOpen" :images="selectedProject.screenshots"
+                        :title="selectedProject.title" v-model="currentImageIndex" @close="closeImageModal" />
 
                     <!-- 프로젝트 설명 -->
                     <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-6 mb-8">
@@ -164,10 +157,10 @@
 
                     <!-- 링크 -->
                     <div class="flex gap-4 pt-6 border-t dark:border-gray-700">
-                        <a v-if="selectedProject.demoLink" :href="selectedProject.demoLink" target="_blank"
+                        <a v-if="selectedProject.liveLink" :href="selectedProject.liveLink" target="_blank"
                             class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                             <i class="fas fa-external-link-alt"></i>
-                            Demo
+                            Live
                         </a>
                         <a :href="selectedProject.githubLink" target="_blank"
                             class="flex items-center gap-2 px-6 py-3 border border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
@@ -177,18 +170,15 @@
                     </div>
                 </div>
             </Modal>
-
-            <!-- 이미지 확대 모달 추가 -->
-            <ImageModal :is-open="isImageModalOpen" :image-src="selectedImage" :image-alt="selectedProject?.title || ''"
-                @close="closeImageModal" />
         </div>
     </section>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import Modal from '../common/Modal.vue'
 import ImageModal from '../common/ImageModal.vue';
+import ImageSlider from '../common/ImageSlider.vue';
 import { projects } from '@/data/projects';
 
 const getItemsPerPage = () => {
@@ -198,13 +188,12 @@ const getItemsPerPage = () => {
 }
 
 const ITEMS_PER_PAGE = ref(getItemsPerPage())
-// const ITEMS_PER_PAGE = 6
 const currentPage = ref(1)
 const isModalOpen = ref(false)
 const selectedProject = ref(null)
 const totalPages = computed(() => Math.ceil(projects.length / ITEMS_PER_PAGE.value))
 const isImageModalOpen = ref(false)
-const selectedImage = ref(null)
+const currentImageIndex = ref(0)
 
 const displayedProjects = computed(() => {
     const start = (currentPage.value - 1) * ITEMS_PER_PAGE.value
@@ -221,14 +210,12 @@ const closeModal = () => {
     selectedProject.value = null
 }
 
-const openImageModal = (imageSrc) => {
-    selectedImage.value = imageSrc
+const openImageModal = (index) => {
     isImageModalOpen.value = true
 }
 
 const closeImageModal = () => {
     isImageModalOpen.value = false
-    selectedImage.value = null
 }
 
 onMounted(() => {
@@ -242,4 +229,10 @@ onUnmounted(() => {
         ITEMS_PER_PAGE.value = getItemsPerPage();
     });
 });
+
+// 프로젝트가 변경될 때도 초기화
+watch(() => selectedProject.value, () => {
+  currentImageIndex.value = 0
+  isImageModalOpen.value = false
+})
 </script>
