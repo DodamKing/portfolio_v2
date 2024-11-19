@@ -1,143 +1,107 @@
 <template>
     <section id="skills" class="py-20 px-4 bg-gray-50 dark:bg-gray-800">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Technical Skills</h2>
+            <h2 class="text-3xl font-bold text-center mb-4 text-gray-900 dark:text-white">Technical Skills</h2>
+            <p class="text-center text-gray-600 dark:text-gray-400 mb-12">프로젝트에 실제 활용한 기술 스택입니다</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Backend Development -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Development Stack -->
                 <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg">
-                    <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">
-                        Backend Development
-                    </h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Node.js</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Express.js</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Java</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Spring</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">전자정부
-                            프레임워크</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Python</span>
-                    </div>
-                </div>
-
-                <!-- Frontend Development -->
-                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg">
-                    <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">
-                        Frontend Development
-                    </h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">JavaScript</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Vue.js</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">React.js</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">HTML5</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">CSS3</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">EJS</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Flutter</span>
-                    </div>
-                </div>
-
-                <!-- Database -->
-                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg">
-                    <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">
-                        Database & Storage
-                    </h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">MySQL</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">MariaDB</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">MongoDB</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Oracle</span>
-                    </div>
-                </div>
-
-                <!-- DevOps & Cloud 섹션 -->
-                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg">
-                    <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">
-                        DevOps & Cloud
+                    <h3 class="text-xl font-semibold mb-6 text-blue-600 dark:text-blue-400 flex items-center gap-2">
+                        <i class="fas fa-code"></i>
+                        Development
                     </h3>
 
-                    <!-- Cloud Platforms -->
-                    <div class="mb-4">
-                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cloud Platforms</h4>
-                        <div class="flex flex-wrap gap-3">
-                            <span
-                                class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">AWS
-                                EC2</span>
-                            <span
-                                class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Naver
-                                Cloud</span>
-                            <span
-                                class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Cafe24
-                                Cloud</span>
+                    <!-- Backend -->
+                    <div class="mb-6">
+                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Backend</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span :class="skillTagClasses">Node.js</span>
+                            <span :class="skillTagClasses">Express.js</span>
+                            <span :class="skillTagClasses">Java</span>
+                            <span :class="skillTagClasses">Spring</span>
+                            <span :class="skillTagClasses">Python</span>
+                            <span :class="skillTagClasses">Flask</span>
+                            <span :class="skillTagClasses">FastAPI</span>
+                            <span :class="skillTagClasses">Supabase</span>
                         </div>
                     </div>
 
-                    <!-- Storage Solutions -->
-                    <div class="mb-4">
-                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Storage & Data Management
-                        </h4>
-                        <div class="flex flex-wrap gap-3">
-                            <span
-                                class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Object
-                                Storage</span>
-                            <span
-                                class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Archive
-                                Storage</span>
+                    <!-- Frontend -->
+                    <div class="mb-6">
+                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Frontend</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span :class="skillTagClasses">Vue.js</span>
+                            <span :class="skillTagClasses">React</span>
+                            <span :class="skillTagClasses">Flutter</span>
                         </div>
                     </div>
 
-                    <!-- DevOps Tools -->
+                    <!-- Database -->
                     <div>
-                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tools & CI/CD</h4>
-                        <div class="flex flex-wrap gap-3">
-                            <span
-                                class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Docker</span>
-                            <span
-                                class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Git</span>
-                            <span
-                                class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">Nginx</span>
+                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Database</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span :class="skillTagClasses">MySQL</span>
+                            <span :class="skillTagClasses">MongoDB</span>
+                            <span :class="skillTagClasses">MariaDB</span>
+                            <span :class="skillTagClasses">Postgresql</span>
+                            <span :class="skillTagClasses">Hive</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Additional Skills -->
+                <!-- Infrastructure & Tools -->
                 <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg">
-                    <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">
-                        Additional Skills
+                    <h3 class="text-xl font-semibold mb-6 text-blue-600 dark:text-blue-400 flex items-center gap-2">
+                        <i class="fas fa-server"></i>
+                        Infrastructure & Tools
                     </h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">의료정보시스템</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">ERP</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">모니터링
-                            시스템</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">데이터
-                            크롤링</span>
-                        <span
-                            class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200 cursor-default">데이터
-                            파이프라인</span>
+
+                    <!-- Cloud & DevOps -->
+                    <div class="mb-6">
+                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Cloud & DevOps</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span :class="skillTagClasses">AWS EC2</span>
+                            <span :class="skillTagClasses">Docker</span>
+                            <span :class="skillTagClasses">Nginx</span>
+                            <span :class="skillTagClasses">Git</span>
+                        </div>
+                    </div>
+
+                    <!-- Domain Expertise -->
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Domain Expertise</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span :class="skillTagClasses">의료정보시스템</span>
+                            <span :class="skillTagClasses">ERP</span>
+                            <span :class="skillTagClasses">모니터링 시스템</span>
+                            <span :class="skillTagClasses">데이터 파이프라인</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </template>
+
+
+<script setup>
+import { computed } from 'vue'
+
+const skillTagClasses = computed(() => [
+    'px-3',
+    'py-1.5',
+    'bg-gray-100',
+    'dark:bg-gray-800',
+    'text-gray-700',
+    'dark:text-gray-300',
+    'rounded-lg',
+    'text-sm',
+    'font-medium',
+    'transition-colors',
+    'duration-200',
+    'cursor-default',
+    'hover:bg-blue-50',
+    'dark:hover:bg-blue-900/30'
+])
+</script>

@@ -3,9 +3,9 @@
 <template>
     <div class="w-full">
         <Hero />
-        <About />
-        <Skills />
         <Projects />
+        <Skills />
+        <About />
         <Contact />
     </div>
 </template>

@@ -108,7 +108,7 @@ export const projects = [
         title: 'DIBE2',
         type: 'Personal',
         category: 'Music Streaming Service',
-        period: '2024.08 - ',
+        period: '2024.08 - 현재',
         shortDescription: '실시간 음원 스트리밍 서비스',
         fullDescription: `
             좋아하는 음악을 언제 어디서나 편리하게 즐길 수 있는 음원 스트리밍 서비스입니다.
