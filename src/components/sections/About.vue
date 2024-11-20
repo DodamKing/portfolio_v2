@@ -151,7 +151,7 @@
                                 <div class="flex flex-wrap gap-4">
                                     <div class="flex items-center gap-2">
                                         <i class="fas fa-hospital-user text-blue-500 dark:text-blue-400"></i>
-                                        <span class="text-sm text-gray-600 dark:text-gray-400">10개+ 의료기관에 공급</span>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">10개+ 의료기관에 납품</span>
                                     </div>
                                     <div class="flex items-center gap-2">
                                         <i class="fas fa-database text-blue-500 dark:text-blue-400"></i>

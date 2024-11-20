@@ -1,5 +1,6 @@
 <template>
-    <section id="contact" class="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+    <section id="contact"
+        class="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold text-center mb-4 text-gray-900 dark:text-white">Contact</h2>
             <p class="text-center text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-8 sm:mb-12">
@@ -26,7 +27,8 @@
                         </div>
 
                         <!-- 카카오톡 -->
-                        <div class="flex items-center p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50">
+                        <div
+                            class="flex items-center p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200">
                             <div
                                 class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center mr-4">
                                 <i class="fas fa-comment text-2xl text-yellow-500 dark:text-yellow-400"></i>
@@ -34,6 +36,15 @@
                             <div>
                                 <p class="font-medium text-gray-800 dark:text-gray-200">카카오톡 1:1 문의</p>
                                 <p class="text-sm text-gray-600 dark:text-gray-400">오픈채팅 준비중</p>
+                                <!-- <p class="text-sm text-yellow-500 dark:text-yellow-400 hover:text-yellow-600 dark:hover:text-yellow-300 transition-colors cursor-pointer"
+                                    @click="openLink('https://open.kakao.com/o/s3KZK40g', '_blank')">
+                                    <span
+                                        class="text-yellow-500 dark:text-yellow-400 hover:text-yellow-600 dark:hover:text-yellow-300 transition-colors border-b border-yellow-400 hover:border-yellow-500">
+                                        <i class="fas fa-comment"></i> 오픈채팅 바로가기
+                                    </span>
+                                    <i
+                                        class="fas fa-external-link-alt text-xs text-yellow-400 group-hover:translate-x-0.5 transition-transform"></i>
+                                </p> -->
                                 <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">평일 10:00 - 19:00 답변 가능</p>
                             </div>
                         </div>
