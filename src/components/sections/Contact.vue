@@ -1,21 +1,21 @@
 <template>
-    <section id="contact" class="py-20 px-4 bg-gray-50 dark:bg-gray-800">
+    <section id="contact" class="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold text-center mb-4 text-gray-900 dark:text-white">Contact</h2>
-            <p class="text-center text-gray-600 dark:text-gray-400 mb-12">
+            <p class="text-center text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-8 sm:mb-12">
                 새로운 기회나 프로젝트 의뢰 및 협업에 대해 이야기하고 싶으시다면 언제든 연락주세요.
             </p>
 
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- 왼쪽: 연락처 정보 -->
-                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8">
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4 sm:p-8">
                     <h3 class="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Contact Information</h3>
                     <div class="space-y-6">
                         <!-- 이메일 -->
                         <div
                             class="flex items-center p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200">
                             <div
-                                class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-4">
+                                class="w-12 h-12 sm:w-14 sm:h-14 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-3 sm:mr-4">
                                 <i class="fas fa-envelope text-2xl text-blue-600 dark:text-blue-400"></i>
                             </div>
                             <div>
@@ -41,7 +41,7 @@
                 </div>
 
                 <!-- 오른쪽: 링크 모음 -->
-                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8">
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4 sm:p-8">
                     <h3 class="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Links & Profiles</h3>
                     <div class="space-y-6">
                         <!-- GitHub -->

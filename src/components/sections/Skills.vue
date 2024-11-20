@@ -1,5 +1,5 @@
 <template>
-    <section id="skills" class="py-20 px-4 bg-gray-50 dark:bg-gray-800">
+    <section id="skills" class="py-20 px-4 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold text-center mb-4 text-gray-900 dark:text-white">Technical Skills</h2>
             <p class="text-center text-gray-600 dark:text-gray-400 mb-12">프로젝트에 실제 활용한 기술 스택입니다</p>

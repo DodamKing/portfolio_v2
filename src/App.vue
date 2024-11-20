@@ -8,6 +8,7 @@
 		</button>
 		<Home />
 		<ScrollToTop />
+		<FloatingActions />
 	</div>
 </template>
 
@@ -15,6 +16,7 @@
 import { ref, onMounted } from 'vue'
 import Home from './components/sections/Home.vue'
 import ScrollToTop from './components/common/ScrollToTop.vue';
+import FloatingActions from './components/common/FloatingActions.vue';
 
 const isDark = ref(false)
 

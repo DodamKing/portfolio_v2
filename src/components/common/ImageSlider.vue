@@ -1,6 +1,6 @@
 <!-- components/ImageSlider.vue -->
 <template>
-    <div class="relative w-full max-w-4xl mx-auto">
+    <div @touchstart="handleTouchStart" @touchend="handleTouchEnd" class="relative w-full max-w-4xl mx-auto">
         <!-- 메인 이미지 컨테이너 -->
         <div class="relative aspect-video bg-gray-900 rounded-lg overflow-hidden">
             <img :src="images[currentIndex]" :alt="`${title} screenshot ${currentIndex + 1}`"
@@ -42,7 +42,10 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+
+const touchStartX = ref(0)
+const touchEndX = ref(0)
 
 const props = defineProps({
     images: {
@@ -88,6 +91,24 @@ const handleKeydown = (e) => {
         goToPrevious()
     } else if (e.key === 'ArrowRight') {
         goToNext()
+    }
+}
+
+// 터치 이벤트 핸들러 추가
+const handleTouchStart = (e) => {
+    touchStartX.value = e.touches[0].clientX
+}
+
+const handleTouchEnd = (e) => {
+    touchEndX.value = e.changedTouches[0].clientX
+    const swipeDistance = touchEndX.value - touchStartX.value
+    
+    if (Math.abs(swipeDistance) > 50) { // 최소 스와이프 거리
+        if (swipeDistance > 0) {
+            goToPrevious()
+        } else {
+            goToNext()
+        }
     }
 }
 

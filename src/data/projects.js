@@ -1,4 +1,10 @@
 // src/data/projects.js
+const getImageUrl = (path) => {
+    return new URL(`../assets/images/${path}`, import.meta.url).href
+}
+
+const getScreenshots = (images) => images.map(img => getImageUrl(img))
+
 export const projects = [
     {
         id: 6,
@@ -25,13 +31,13 @@ export const projects = [
             • 정확한 수식과 알고리즘으로 신뢰할 수 있는 결과
             • 깔끔한 결과 정리로 한눈에 파악
         `,
-        image: '/src/assets/images/calculator.png',
-        screenshots: [
-            '/src/assets/images/calculator.png',
-            '/src/assets/images/calculator_1.png',
-            '/src/assets/images/calculator_2.png',
-            '/src/assets/images/calculator_3.png',
-        ],
+        image: getImageUrl('calculator.png'),
+        screenshots: getScreenshots([
+            'calculator.png',
+            'calculator_1.png',
+            'calculator_2.png',
+            'calculator_3.png',
+        ]),
         technologies: ['React', 'TailwindCSS', 'React Router', 'GitHub Pages'],
         features: [
             '주요 카테고리별 계산기 제공',
@@ -75,18 +81,18 @@ export const projects = [
               - 자연스러운 화면 전환
               - 최적화된 반응 속도
         `,
-        image: '/src/assets/images/maplis/5.png',
-        screenshots: [
-            '/src/assets/images/maplis/0.png',
-            '/src/assets/images/maplis/1.png',
-            '/src/assets/images/maplis/2.png',
-            '/src/assets/images/maplis/3.png',
-            '/src/assets/images/maplis/4.png',
-            '/src/assets/images/maplis/5.png',
-            '/src/assets/images/maplis/6.png',
-            '/src/assets/images/maplis/7.png',
-            '/src/assets/images/maplis/8.png',
-        ],
+        image: getImageUrl('maplis/5.png'),
+        screenshots: getScreenshots([
+            'maplis/0.png',
+            'maplis/1.png',
+            'maplis/2.png',
+            'maplis/3.png',
+            'maplis/4.png',
+            'maplis/5.png',
+            'maplis/6.png',
+            'maplis/7.png',
+            'maplis/8.png',
+        ]),
         technologies: [
             'Flutter',
             'Supabase',
@@ -135,18 +141,18 @@ export const projects = [
             • 개인 맞춤 플레이리스트 관리
             • 구글/카카오 계정으로 간편 로그인
         `,
-        image: '/src/assets/images/dibe2/dibe2.png',
-        screenshots: [
-            '/src/assets/images/dibe2/dibe2_1.png',
-            '/src/assets/images/dibe2/dibe2.png',
-            '/src/assets/images/dibe2/dibe2_2.png',
-            '/src/assets/images/dibe2/dibe2_3.png',
-            '/src/assets/images/dibe2/dibe2_4.png',
-            '/src/assets/images/dibe2/dibe2_5.png',
-            '/src/assets/images/dibe2/dibe2_6.png',
-            '/src/assets/images/dibe2/dibe2_7.png',
-            '/src/assets/images/dibe2/dibe2_8.png',
-        ],
+        image: getImageUrl('dibe2/dibe2.png'),
+        screenshots: getScreenshots([
+            'dibe2/dibe2_1.png',
+            'dibe2/dibe2.png',
+            'dibe2/dibe2_2.png',
+            'dibe2/dibe2_3.png',
+            'dibe2/dibe2_4.png',
+            'dibe2/dibe2_5.png',
+            'dibe2/dibe2_6.png',
+            'dibe2/dibe2_7.png',
+            'dibe2/dibe2_8.png',
+        ]),
         technologies: ['Nuxt 2', 'Express.js', 'Express Middleware', 'MongoDB Atlas', 'AWS EC2', 'Nginx', 'PM2',],
         features: [
             '커스텀 미디어 컨트롤러가 적용된 웹 플레이어',
@@ -174,12 +180,12 @@ export const projects = [
             • Flutter를 활용한 크로스 플랫폼 지원으로 접근성 향상
             • AWS 인프라 구축으로 안정적인 서비스 제공
         `,
-        image: '/src/assets/images/stock.jpg',
-        screenshots: [
-            '/src/assets/images/stock.jpg',
-            '/src/assets/images/stock_1.jpg',
-            '/src/assets/images/stock_2.jpg',
-        ],
+        image: getImageUrl('stock.jpg'),
+        screenshots: getScreenshots([
+            'stock.jpg',
+            'stock_1.jpg',
+            'stock_2.jpg',
+        ]),
         technologies: ['Flutter', 'Flask', 'AWS', 'Hive'],
         features: [
             '실시간 포트폴리오 모니터링',
@@ -206,10 +212,10 @@ export const projects = [
             Spring Boot와 Vue.js를 활용한 풀스택 개발로,
             안정적이고 사용자 친화적인 서비스를 구현했습니다.
         `,
-        image: '/src/assets/images/headlineHub.png',
-        screenshots: [
-            '/src/assets/images/headlineHub.png',
-        ],
+        image: getImageUrl('headlinehub.png'),
+        screenshots: getScreenshots([
+            'headlinehub.png',
+        ]),
         technologies: ['Vue.js', 'FastAPI', 'Spring Boot', 'MongoDB'],
         features: [
             '실시간 뉴스 집계',
@@ -236,13 +242,13 @@ export const projects = [
             JSP와 Spring Framework를 기반으로 개발되었으며,
             사용자별 플레이리스트 기능으로 개인화된 음악 경험을 제공합니다.
         `,
-        image: '/src/assets/images/ddmusic.png',
-        screenshots: [
-            '/src/assets/images/ddmusic.png',
-            '/src/assets/images/ddmusic_1.png',
-            '/src/assets/images/ddmusic_2.png',
-            '/src/assets/images/ddmusic_3.png',
-        ],
+        image: getImageUrl('ddmusic.png'),
+        screenshots: getScreenshots([
+            'ddmusic.png',
+            'ddmusic_1.png',
+            'ddmusic_2.png',
+            'ddmusic_3.png',
+        ]),
         technologies: ['Java', 'Spring', 'MySQL', 'JSP'],
         features: [
             '실시간 음원 차트',

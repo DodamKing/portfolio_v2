@@ -36,11 +36,11 @@
                                     <span>구매/자재/자산 관리 전체 프로세스 디지털화</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <span class="text-blue-500 mr-2">›</span>
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
                                     <span>BOM 관리, 구매 신청, 입/출고, 자산 관리 등 전체 프로세스 자동화</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <span class="text-blue-500 mr-2">›</span>
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
                                     <span>MongoDB를 활용한 확장 가능한 데이터베이스 설계</span>
                                 </li>
                             </ul>
@@ -48,12 +48,12 @@
                                 <div class="text-sm text-gray-500 dark:text-gray-400 mb-2">성과 및 규모:</div>
                                 <div class="flex flex-wrap gap-4">
                                     <div class="flex items-center gap-2">
-                                        <i class="fas fa-users text-blue-500"></i>
-                                        <span class="text-sm">전사 임직원 활용</span>
+                                        <i class="fas fa-users text-blue-500 dark:text-blue-400"></i>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">전사 임직원 활용</span>
                                     </div>
                                     <div class="flex items-center gap-2">
-                                        <i class="fas fa-check text-blue-500"></i>
-                                        <span class="text-sm">수기 문서 작업 자동화</span>
+                                        <i class="fas fa-check text-blue-500 dark:text-blue-400"></i>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">수기 문서 작업 자동화</span>
                                     </div>
                                 </div>
                             </div>
@@ -68,11 +68,11 @@
                             </div>
                             <ul class="space-y-3 text-gray-600 dark:text-gray-300">
                                 <li class="flex items-start">
-                                    <span class="text-blue-500 mr-2">›</span>
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
                                     <span>실시간 데이터 수집 및 처리 파이프라인 구축</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <span class="text-blue-500 mr-2">›</span>
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
                                     <span>실시간 모니터링 대시보드 개발 및 알림 시스템 구현</span>
                                 </li>
                             </ul>
@@ -88,15 +88,15 @@
                             </div>
                             <ul class="space-y-3 text-gray-600 dark:text-gray-300">
                                 <li class="flex items-start">
-                                    <span class="text-blue-500 mr-2">›</span>
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
                                     <span>AI 모델과 연동된 RESTful API 설계 및 개발</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <span class="text-blue-500 mr-2">›</span>
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
                                     <span>실시간 데이터 시각화 대시보드 구현</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <span class="text-blue-500 mr-2">›</span>
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
                                     <span>AI 학습 결과 데이터 저장 및 조회 시스템 구축</span>
                                 </li>
                             </ul>
@@ -150,12 +150,12 @@
                                 <div class="text-sm text-gray-500 dark:text-gray-400 mb-2">주요 성과:</div>
                                 <div class="flex flex-wrap gap-4">
                                     <div class="flex items-center gap-2">
-                                        <i class="fas fa-hospital-user text-blue-500"></i>
-                                        <span class="text-sm">10개+ 의료기관에 공급</span>
+                                        <i class="fas fa-hospital-user text-blue-500 dark:text-blue-400"></i>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">10개+ 의료기관에 공급</span>
                                     </div>
                                     <div class="flex items-center gap-2">
-                                        <i class="fas fa-database text-blue-500"></i>
-                                        <span class="text-sm">1TB+ 의료영상 관리</span>
+                                        <i class="fas fa-database text-blue-500 dark:text-blue-400"></i>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">1TB+ 의료영상 관리</span>
                                     </div>
                                 </div>
                             </div>

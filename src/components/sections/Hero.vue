@@ -1,103 +1,128 @@
 <!-- components/sections/Hero.vue -->
 <template>
-	<section class="min-h-screen flex items-center justify-center px-4 md:px-6 pt-12 sm:pt-0">
-		<div class="max-w-4xl mx-auto">
-			<div class="text-center space-y-8">
-				<!-- 메인 타이틀 -->
-				<h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white">
-					안녕하세요,
-					<span class="text-blue-600 dark:text-blue-400 block mt-2">김도담입니다</span>
-				</h1>
+	<section class="min-h-screen flex items-center justify-center px-4 sm:px-6 py-16 sm:py-0 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+		<div class="max-w-6xl w-full mx-auto">
+			<div class="max-w-4xl mx-auto">
+				<div class="text-center space-y-12 sm:space-y-16">
+					<!-- 메인 타이틀 -->
+					<div class="space-y-6">
+						<!-- 메인 메시지 분리 및 강조 -->
+						<h1
+							class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+							당신의 아이디어를<br />
+							<span class="text-blue-600 dark:text-blue-400">현실로 만듭니다</span>
+						</h1>
 
-				<!-- 핵심 가치 제안 -->
-				<h2 class="text-xl md:text-2xl text-gray-600 dark:text-gray-400">
-					<span class="text-blue-600 dark:text-blue-400 font-semibold">서비스의 시작부터 운영까지</span><br />
-					모든 개발 과정을 함께합니다
-				</h2>
-
-				<!-- 핵심 메시지 -->
-				<div class="space-y-4 max-w-2xl mx-auto">
-					<p class="text-gray-700 dark:text-gray-300">
-						기획부터 배포, 운영까지 전체 개발 사이클을 이해하고<br />
-						효율적인 웹 서비스를 구축합니다.
-					</p>
-				</div>
-
-				<!-- 핵심 역량 -->
-				<div class="grid md:grid-cols-4 gap-6 max-w-3xl mx-auto mt-12">
-					<div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
-						<i class="fas fa-server text-2xl text-blue-600 mb-4"></i>
-						<h3 class="font-semibold mb-2">백엔드</h3>
-						<p class="text-sm text-gray-600 dark:text-gray-400">
-							안정적인 서버<br />시스템 구축
-						</p>
-					</div>
-					<div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
-						<i class="fas fa-desktop text-2xl text-blue-600 mb-4"></i>
-						<h3 class="font-semibold mb-2">프론트엔드</h3>
-						<p class="text-sm text-gray-600 dark:text-gray-400">
-							반응형 웹<br />사용자 경험 최적화
-						</p>
-					</div>
-					<div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
-						<i class="fas fa-mobile-alt text-2xl text-blue-600 mb-4"></i>
-						<h3 class="font-semibold mb-2">앱 개발</h3>
-						<p class="text-sm text-gray-600 dark:text-gray-400">
-							크로스플랫폼<br />앱 서비스 구현
-						</p>
-					</div>
-					<div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
-						<i class="fas fa-cogs text-2xl text-blue-600 mb-4"></i>
-						<h3 class="font-semibold mb-2">DevOps</h3>
-						<p class="text-sm text-gray-600 dark:text-gray-400">
-							배포 자동화와<br />안정적인 운영
-						</p>
-					</div>
-				</div>
-
-				<!-- 개발 프로세스 -->
-				<div class="mt-16">
-					<h3 class="text-lg font-semibold mb-6 text-gray-800 dark:text-gray-200">
-						전체 개발 프로세스를 책임집니다
-					</h3>
-					<div class="flex justify-center items-center gap-4 flex-wrap">
-						<div class="flex items-center">
-							<span
-								class="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full">
-								기획/분석
-							</span>
-							<i class="fas fa-chevron-right mx-2 text-gray-400"></i>
-						</div>
-						<div class="flex items-center">
-							<span
-								class="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full">
-								설계/개발
-							</span>
-							<i class="fas fa-chevron-right mx-2 text-gray-400"></i>
-						</div>
-						<div class="flex items-center">
-							<span
-								class="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full">
-								테스트/배포
-							</span>
-							<i class="fas fa-chevron-right mx-2 text-gray-400"></i>
-						</div>
-						<div class="flex items-center">
-							<span
-								class="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full">
-								운영/개선
-							</span>
+						<!-- 서브 메시지 -->
+						<div class="space-y-3">
+							<p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400">
+								사용자 경험을 최우선으로,<br class="sm:hidden" />
+								가치 있는 해결책을 제시합니다
+							</p>
+							<p class="text-base sm:text-lg text-gray-600 dark:text-gray-400">
+								<span class="text-blue-600 dark:text-blue-400 font-semibold">Full Stack Developer</span>
+								김도담입니다
+							</p>
 						</div>
 					</div>
-				</div>
 
-				<!-- 연락하기 버튼 -->
-				<div class="mt-12">
-					<button @click="scrollToContact" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 
-                        transform hover:-translate-y-0.5 transition-all duration-200
-                        shadow-md hover:shadow-lg">
-						프로젝트 문의하기
-					</button>
+					<!-- 버튼 섹션 -->
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<button @click="scrollToProjects"
+							class="w-full sm:w-auto px-8 py-4 sm:py-3.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg text-base">
+							<i class="fas fa-eye mr-2"></i>
+							프로젝트 보기
+						</button>
+						<button @click="scrollToContact"
+							class="w-full sm:w-auto px-8 py-4 sm:py-3.5 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-all duration-200 text-base">
+							<i class="fas fa-paper-plane mr-2"></i>
+							프로젝트 문의하기
+						</button>
+					</div>
+
+					<!-- 전문 분야 -->
+					<div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mx-auto">
+						<div
+							class="p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+							<i class="fas fa-laptop-code text-2xl text-blue-600 dark:text-blue-400 mb-4"></i>
+							<h3 class="font-semibold mb-2 text-gray-900 dark:text-gray-100">웹 서비스</h3>
+							<p class="text-sm text-gray-600 dark:text-gray-400">
+								반응형 웹<br />풀스택 개발
+							</p>
+						</div>
+						<div
+							class="p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+							<i class="fas fa-mobile-alt text-2xl text-blue-600 dark:text-blue-400 mb-4"></i>
+							<h3 class="font-semibold mb-2 text-gray-900 dark:text-gray-100">앱 개발</h3>
+							<p class="text-sm text-gray-600 dark:text-gray-400">
+								Android/iOS<br />크로스플랫폼
+							</p>
+						</div>
+						<div
+							class="p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+							<i class="fas fa-server text-2xl text-blue-600 dark:text-blue-400 mb-4"></i>
+							<h3 class="font-semibold mb-2 text-gray-900 dark:text-gray-100">API 개발</h3>
+							<p class="text-sm text-gray-600 dark:text-gray-400">
+								REST API<br />시스템 설계
+							</p>
+						</div>
+						<div
+							class="p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+							<i class="fas fa-shield-alt text-2xl text-blue-600 dark:text-blue-400 mb-4"></i>
+							<h3 class="font-semibold mb-2 text-gray-900 dark:text-gray-100">유지보수</h3>
+							<p class="text-sm text-gray-600 dark:text-gray-400">
+								성능 최적화<br />보안 강화
+							</p>
+						</div>
+					</div>
+
+					<!-- 핵심 가치 제안 -->
+					<div class="grid sm:grid-cols-3 gap-5 sm:gap-6 mt-8 text-left">
+						<div
+							class="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-xl hover:shadow-md transition-all duration-200">
+							<div class="flex items-center gap-4 mb-4">
+								<span
+									class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0">
+									<i class="fas fa-comments text-xl text-blue-600 dark:text-blue-400"></i>
+								</span>
+								<h3 class="font-semibold text-lg dark:text-gray-100">소통과 공감</h3>
+							</div>
+							<p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+								비즈니스 요구사항을 정확히 이해하고,
+								명확한 소통으로 최적의 해결책을 제시합니다.
+							</p>
+						</div>
+
+						<div
+							class="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-xl hover:shadow-md transition-all duration-200">
+							<div class="flex items-center gap-4 mb-4">
+								<span
+									class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0">
+									<i class="fas fa-lightbulb text-xl text-blue-600 dark:text-blue-400"></i>
+								</span>
+								<h3 class="font-semibold text-lg dark:text-gray-100">문제 해결</h3>
+							</div>
+							<p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+								실무 개발 경험을 바탕으로
+								효율적이고 안정적인 솔루션을 구현합니다.
+							</p>
+						</div>
+
+						<div
+							class="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-xl hover:shadow-md transition-all duration-200">
+							<div class="flex items-center gap-4 mb-4">
+								<span
+									class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0">
+									<i class="fas fa-rocket text-xl text-blue-600 dark:text-blue-400"></i>
+								</span>
+								<h3 class="font-semibold text-lg dark:text-gray-100">지속적 성장</h3>
+							</div>
+							<p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+								새로운 기술과 트렌드를 학습하며
+								더 나은 서비스를 만들기 위해 노력합니다.
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -105,6 +130,12 @@
 </template>
 
 <script setup>
+const scrollToProjects = () => {
+	document.getElementById('projects')?.scrollIntoView({
+		behavior: 'smooth'
+	})
+}
+
 const scrollToContact = () => {
 	document.getElementById('contact')?.scrollIntoView({
 		behavior: 'smooth'
