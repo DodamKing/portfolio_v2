@@ -280,6 +280,7 @@ import { projects } from '@/data/projects';
 const carouselRef = ref(null)
 const currentSlide = ref(0)
 const touchStart = ref(0)
+const touchStartY = ref(0)
 
 const getItemsPerPage = () => {
     if (window.innerWidth < 640) return 2;  // 모바일
@@ -302,11 +303,22 @@ const displayedProjects = computed(() => {
 
 const handleTouchStart = (e) => {
     touchStart.value = e.touches[0].clientX
+    touchStartY.value = e.touches[0].clientY
 }
 
 const handleTouchMove = (e) => {
     if (!touchStart.value) return
-    e.preventDefault()
+
+    // 현재 터치 위치
+    const touchX = e.touches[0].clientX
+    const touchY = e.touches[0].clientY
+    const deltaX = touchStart.value - touchX
+    const deltaY = Math.abs(e.touches[0].clientY - touchStartY.value)
+
+    // 수평 스와이프가 수직 이동보다 큰 경우에만 preventDefault
+    if (Math.abs(deltaX) > deltaY) {
+        e.preventDefault()
+    }
 }
 
 const handleTouchEnd = (e) => {

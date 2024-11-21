@@ -35,8 +35,8 @@
                             </div>
                             <div>
                                 <p class="font-medium text-gray-800 dark:text-gray-200">카카오톡 1:1 문의</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">오픈채팅 준비중</p>
-                                <!-- <p class="text-sm text-yellow-500 dark:text-yellow-400 hover:text-yellow-600 dark:hover:text-yellow-300 transition-colors cursor-pointer"
+                                <!-- <p class="text-sm text-gray-600 dark:text-gray-400">오픈채팅 준비중</p> -->
+                                <p class="text-sm text-yellow-500 dark:text-yellow-400 hover:text-yellow-600 dark:hover:text-yellow-300 transition-colors cursor-pointer"
                                     @click="openLink('https://open.kakao.com/o/s3KZK40g', '_blank')">
                                     <span
                                         class="text-yellow-500 dark:text-yellow-400 hover:text-yellow-600 dark:hover:text-yellow-300 transition-colors border-b border-yellow-400 hover:border-yellow-500">
@@ -44,7 +44,7 @@
                                     </span>
                                     <i
                                         class="fas fa-external-link-alt text-xs text-yellow-400 group-hover:translate-x-0.5 transition-transform"></i>
-                                </p> -->
+                                </p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">평일 10:00 - 19:00 답변 가능</p>
                             </div>
                         </div>

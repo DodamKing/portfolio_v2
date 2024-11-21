@@ -169,6 +169,9 @@ const handleTouchStart = (e) => {
         // 핀치 줌 시작
         initialPinchDistance.value = getPinchDistance(e.touches)
         initialScale.value = scale.value
+        
+        // 시작 위치 저장
+        startPosition.value = { ...position.value }
         return
     }
 
@@ -195,7 +198,32 @@ const handleTouchMove = (e) => {
         // 핀치 줌 처리
         const currentDistance = getPinchDistance(e.touches)
         const pinchScale = currentDistance / initialPinchDistance.value
-        scale.value = Math.min(Math.max(initialScale.value * pinchScale, MIN_SCALE), MAX_SCALE)
+        
+        // 이전 스케일을 기준으로 부드러운 확대/축소
+        const newScale = initialScale.value * pinchScale
+        
+        // MIN_SCALE과 MAX_SCALE 사이의 값으로 제한
+        scale.value = Math.min(Math.max(newScale, MIN_SCALE), MAX_SCALE)
+
+        // 핀치 줌 중심점 계산
+        const center = {
+            x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+            y: (e.touches[0].clientY + e.touches[1].clientY) / 2
+        }
+
+        // 줌 중심점 기준으로 위치 조정
+        const bounds = calculateBounds()
+        position.value = {
+            x: Math.max(Math.min(
+                (center.x - containerRef.value.offsetWidth / 2) / scale.value,
+                bounds.right
+            ), -bounds.right),
+            y: Math.max(Math.min(
+                (center.y - containerRef.value.offsetHeight / 2) / scale.value,
+                bounds.bottom
+            ), -bounds.bottom)
+        }
+        
         return
     }
 
