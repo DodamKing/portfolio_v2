@@ -1,65 +1,76 @@
 <template>
-    <Modal :is-open="isOpen" @close="$emit('close')" class="max-w-[90vw]">
-        <div ref="containerRef" class="relative bg-black min-h-[80vh] flex items-center justify-center overflow-hidden">
-            <!-- 메인 이미지 -->
-            <div ref="dragArea" class="relative touch-none"
-                :class="{ 'cursor-grab': scale > 1 && !isDragging, 'cursor-grabbing': isDragging }"
-                :style="{ transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)` }"
-                @mousedown.prevent="startDrag" @touchstart.prevent="startDrag" @wheel="handleWheel">
-                <img ref="imageRef" :src="images[modelValue]" :alt="`${title} screenshot ${modelValue + 1}`"
-                    class="max-h-[80vh] w-auto object-contain transition-transform duration-200 select-none"
-                    @dblclick="toggleZoom" @load="onImageLoad" @dragstart.prevent />
-            </div>
-
-            <!-- 네비게이션 화살표 - 모바일에서는 스와이프로 대체 -->
-            <template v-if="!isMobile">
-                <button v-show="images.length > 1" @click="$emit('update:modelValue', previousIndex)"
-                    class="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">
-                    <i class="fas fa-chevron-left text-2xl"></i>
-                </button>
-
-                <button v-show="images.length > 1" @click="$emit('update:modelValue', nextIndex)"
-                    class="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">
-                    <i class="fas fa-chevron-right text-2xl"></i>
-                </button>
-            </template>
-
-            <!-- 컨트롤 패널 -->
-            <div class="absolute bottom-4 left-0 right-0 flex justify-between items-center px-4">
-                <div v-if="images.length > 1" class="px-3 py-1 bg-black/50 text-white rounded-full text-sm">
-                    {{ modelValue + 1 }} / {{ images.length }}
+    <transition name="fade">
+        <div v-if="isOpen" class="fixed inset-0 z-[9999] bg-black">
+            <!-- 이미지 뷰어 영역 -->
+            <div ref="containerRef" class="relative w-full h-full flex items-center justify-center">
+                <!-- 메인 이미지 -->
+                <div ref="dragArea" class="relative touch-none"
+                    :class="{ 'cursor-grab': scale > 1 && !isDragging, 'cursor-grabbing': isDragging }"
+                    :style="{ transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)` }"
+                    @mousedown.prevent="startDrag" 
+                    @touchstart.prevent="handleTouchStart">
+                    <img ref="imageRef" 
+                        :src="images[modelValue]" 
+                        :alt="`${title} screenshot ${modelValue + 1}`"
+                        class="max-w-[100vw] max-h-[100vh] w-auto h-auto object-contain select-none"
+                        @dblclick="toggleZoom" 
+                        @load="onImageLoad" 
+                        @dragstart.prevent />
                 </div>
-                <div class="flex gap-2">
-                    <button @click="zoomOut"
-                        class="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors disabled:opacity-50"
-                        :disabled="scale <= 1">
-                        <i class="fas fa-search-minus"></i>
+
+                <!-- 네비게이션 화살표 - 모바일에서는 스와이프로 대체 -->
+                <template v-if="!isMobile && images.length > 1">
+                    <button @click="$emit('update:modelValue', previousIndex)"
+                        class="absolute left-4 top-1/2 -translate-y-1/2 p-4 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">
+                        <i class="fas fa-chevron-left text-2xl"></i>
                     </button>
-                    <button @click="zoomIn"
-                        class="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors disabled:opacity-50"
-                        :disabled="scale >= MAX_SCALE">
-                        <i class="fas fa-search-plus"></i>
+
+                    <button @click="$emit('update:modelValue', nextIndex)"
+                        class="absolute right-4 top-1/2 -translate-y-1/2 p-4 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">
+                        <i class="fas fa-chevron-right text-2xl"></i>
                     </button>
-                    <button @click="resetZoom"
-                        class="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors disabled:opacity-50"
-                        :disabled="scale === 1">
-                        <i class="fas fa-undo"></i>
+                </template>
+
+                <!-- 상단 컨트롤 -->
+                <div class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center bg-gradient-to-b from-black/50 to-transparent">
+                    <div class="text-white text-sm">
+                        <span v-if="title" class="mr-4">{{ title }}</span>
+                        <span v-if="images.length > 1">{{ modelValue + 1 }} / {{ images.length }}</span>
+                    </div>
+                    <button @click="$emit('close')"
+                        class="p-2 text-white hover:text-gray-300 transition-colors">
+                        <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
-            </div>
 
-            <!-- 닫기 버튼 -->
-            <button @click="$emit('close')"
-                class="absolute top-4 right-4 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">
-                <i class="fas fa-times text-xl"></i>
-            </button>
+                <!-- 하단 컨트롤 -->
+                <div class="absolute bottom-0 left-0 right-0 p-4 flex justify-center items-center bg-gradient-to-t from-black/50 to-transparent">
+                    <div class="flex gap-4">
+                        <button @click="zoomOut"
+                            class="p-2 text-white hover:text-gray-300 transition-colors disabled:opacity-50"
+                            :disabled="scale <= 1">
+                            <i class="fas fa-search-minus text-xl"></i>
+                        </button>
+                        <button @click="zoomIn"
+                            class="p-2 text-white hover:text-gray-300 transition-colors disabled:opacity-50"
+                            :disabled="scale >= MAX_SCALE">
+                            <i class="fas fa-search-plus text-xl"></i>
+                        </button>
+                        <button @click="resetZoom"
+                            class="p-2 text-white hover:text-gray-300 transition-colors disabled:opacity-50"
+                            :disabled="scale === 1">
+                            <i class="fas fa-undo text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </Modal>
+    </transition>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
-import Modal from './Modal.vue'
+import { useModalNavigation } from '../composables/useModal';
 
 const props = defineProps({
     isOpen: Boolean,
@@ -69,6 +80,12 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['close', 'update:modelValue'])
+
+// 모달 네비게이션 설정
+const { addModalToHistory, removeModalFromHistory } = useModalNavigation(
+    computed(() => props.isOpen),
+    () => emit('close'), 'image'
+)
 
 // refs
 const containerRef = ref(null)
@@ -89,6 +106,11 @@ const startPosition = ref({ x: 0, y: 0 })
 const isMobile = ref(window.innerWidth <= 768)
 const imageSize = ref({ width: 0, height: 0 })
 const containerSize = ref({ width: 0, height: 0 })
+
+// 터치 관련 상태
+const initialPinchDistance = ref(0)
+const initialScale = ref(1)
+const lastTouchTime = ref(0)
 
 // 인덱스 계산
 const nextIndex = computed(() =>
@@ -112,8 +134,6 @@ const onImageLoad = () => {
             width: containerRect.width,
             height: containerRect.height
         }
-
-        // 초기 상태 리셋
         resetZoom()
     }
 }
@@ -131,60 +151,135 @@ const calculateBounds = () => {
     }
 }
 
-// 드래그 관련 함수
-const startDrag = (e) => {
-    if (scale.value <= 1) return
+// 터치 이벤트 핸들러
+const handleTouchStart = (e) => {
     e.preventDefault()
+    const now = Date.now()
+    const timeDiff = now - lastTouchTime.value
 
-    isDragging.value = true
-    const pos = e.touches ? e.touches[0] : e
+    if (timeDiff < 300) {  // 더블 탭 감지
+        toggleZoom()
+        e.preventDefault()
+        lastTouchTime.value = 0
+        return
+    }
+    lastTouchTime.value = now
 
-    dragStart.value = {
-        x: pos.clientX,
-        y: pos.clientY
+    if (e.touches.length === 2) {
+        // 핀치 줌 시작
+        initialPinchDistance.value = getPinchDistance(e.touches)
+        initialScale.value = scale.value
+        return
     }
 
+    // 단일 터치 (드래그 또는 스와이프)
+    const touch = e.touches[0]
+    dragStart.value = {
+        x: touch.clientX,
+        y: touch.clientY
+    }
     startPosition.value = {
         x: position.value.x,
         y: position.value.y
     }
+    isDragging.value = true
 
-    // 마우스 이벤트 리스너 등록
-    if (e.type === 'mousedown') {
-        document.addEventListener('mousemove', onDrag)
-        document.addEventListener('mouseup', stopDrag)
-    } else {
-        document.addEventListener('touchmove', onDrag, { passive: false })
-        document.addEventListener('touchend', stopDrag)
-    }
+    document.addEventListener('touchmove', handleTouchMove, { passive: false })
+    document.addEventListener('touchend', handleTouchEnd)
 }
 
-const onDrag = (e) => {
-    if (!isDragging.value) return
+const handleTouchMove = (e) => {
     e.preventDefault()
 
-    const pos = e.touches ? e.touches[0] : e
-    const dx = pos.clientX - dragStart.value.x
-    const dy = pos.clientY - dragStart.value.y
+    if (e.touches.length === 2) {
+        // 핀치 줌 처리
+        const currentDistance = getPinchDistance(e.touches)
+        const pinchScale = currentDistance / initialPinchDistance.value
+        scale.value = Math.min(Math.max(initialScale.value * pinchScale, MIN_SCALE), MAX_SCALE)
+        return
+    }
+
+    if (!isDragging.value || scale.value <= 1) return
+
+    const touch = e.touches[0]
+    const dx = touch.clientX - dragStart.value.x
+    const dy = touch.clientY - dragStart.value.y
 
     const bounds = calculateBounds()
-
     position.value = {
         x: Math.max(Math.min(startPosition.value.x + dx / scale.value, bounds.right), -bounds.right),
         y: Math.max(Math.min(startPosition.value.y + dy / scale.value, bounds.bottom), -bounds.bottom)
     }
 }
 
-const stopDrag = (e) => {
+const handleTouchEnd = (e) => {
     if (!isDragging.value) return
 
-    isDragging.value = false
+    const touch = e.changedTouches[0]
+    const dx = touch.clientX - dragStart.value.x
+    const dy = Math.abs(touch.clientY - dragStart.value.y)
 
-    // 이벤트 리스너 제거
+    // 수평 스와이프가 수직 이동보다 크고, 확대되지 않은 상태일 때만 이미지 전환
+    if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > dy && scale.value === 1) {
+        if (dx > 0) {
+            emit('update:modelValue', previousIndex.value)
+        } else {
+            emit('update:modelValue', nextIndex.value)
+        }
+    }
+
+    isDragging.value = false
+    initialPinchDistance.value = 0
+    document.removeEventListener('touchmove', handleTouchMove)
+    document.removeEventListener('touchend', handleTouchEnd)
+}
+
+// 마우스 드래그 핸들러 (데스크톱)
+const startDrag = (e) => {
+    if (scale.value <= 1 || e.touches) return
+    e.preventDefault()
+
+    isDragging.value = true
+    dragStart.value = {
+        x: e.clientX,
+        y: e.clientY
+    }
+    startPosition.value = {
+        x: position.value.x,
+        y: position.value.y
+    }
+
+    document.addEventListener('mousemove', onDrag)
+    document.addEventListener('mouseup', stopDrag)
+}
+
+const onDrag = (e) => {
+    if (!isDragging.value) return
+    e.preventDefault()
+
+    const dx = e.clientX - dragStart.value.x
+    const dy = e.clientY - dragStart.value.y
+
+    const bounds = calculateBounds()
+    position.value = {
+        x: Math.max(Math.min(startPosition.value.x + dx / scale.value, bounds.right), -bounds.right),
+        y: Math.max(Math.min(startPosition.value.y + dy / scale.value, bounds.bottom), -bounds.bottom)
+    }
+}
+
+const stopDrag = () => {
+    if (!isDragging.value) return
+    isDragging.value = false
     document.removeEventListener('mousemove', onDrag)
     document.removeEventListener('mouseup', stopDrag)
-    document.removeEventListener('touchmove', onDrag)
-    document.removeEventListener('touchend', stopDrag)
+}
+
+// 핀치 거리 계산
+const getPinchDistance = (touches) => {
+    return Math.hypot(
+        touches[1].clientX - touches[0].clientX,
+        touches[1].clientY - touches[0].clientY
+    )
 }
 
 // 줌 관련 함수
@@ -216,17 +311,6 @@ const toggleZoom = () => {
     }
 }
 
-// 마우스 휠 이벤트 처리
-const handleWheel = (e) => {
-    e.preventDefault()
-    if (e.deltaY < 0) {
-        zoomIn()
-    } else {
-        zoomOut()
-    }
-}
-
-// 이벤트 리스너
 const handleResize = () => {
     isMobile.value = window.innerWidth <= 768
     onImageLoad()
@@ -245,25 +329,25 @@ const handleKeydown = (e) => {
         case 'Escape':
             emit('close')
             break
-        case '=':
-        case '+':
-            zoomIn()
-            break
-        case '-':
-            zoomOut()
-            break
-        case '0':
-            resetZoom()
-            break
     }
 }
 
-// 이미지 변경시 줌 리셋
-watch(() => props.modelValue, () => {
-    resetZoom()
+watch([() => props.modelValue, () => props.isOpen], ([newModelValue, newIsOpen], [oldModelValue, oldIsOpen]) => {
+    // 이미지가 변경될 때
+    if (newModelValue !== oldModelValue) {
+        resetZoom()
+    }
+    
+    // 모달이 열리고 닫힐 때
+    if (newIsOpen !== oldIsOpen) {
+        if (newIsOpen) {
+            addModalToHistory()
+        } else {
+            removeModalFromHistory()
+        }
+    }
 })
 
-// 라이프사이클 훅
 onMounted(() => {
     window.addEventListener('keydown', handleKeydown)
     window.addEventListener('resize', handleResize)
@@ -275,8 +359,22 @@ onUnmounted(() => {
     window.removeEventListener('resize', handleResize)
     document.removeEventListener('mousemove', onDrag)
     document.removeEventListener('mouseup', stopDrag)
-    document.removeEventListener('touchmove', onDrag)
-    document.removeEventListener('touchend', stopDrag)
+    document.removeEventListener('touchmove', handleTouchMove)
+    document.removeEventListener('touchend', handleTouchEnd)
+    if (props.isOpen) {
+        removeModalFromHistory()
+    }
 })
-
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>

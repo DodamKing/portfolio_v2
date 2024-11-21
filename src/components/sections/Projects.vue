@@ -1,5 +1,6 @@
 <template>
-    <section id="projects" class="py-12 sm:py-20 px-4 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+    <section id="projects"
+        class="py-12 sm:py-20 px-4 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-2xl sm:text-3xl font-bold text-center mb-4 text-gray-900 dark:text-white">Projects</h2>
             <p class="text-center text-gray-600 dark:text-gray-400 mb-8 sm:mb-12">최근 진행한 주요 프로젝트입니다.</p>
@@ -184,10 +185,12 @@
 
             <!-- 프로젝트 상세 모달 -->
             <Modal :is-open="isModalOpen" @close="closeModal">
-                <div v-if="selectedProject" class="max-w-4xl text-gray-900 dark:text-white">
-                    <div class="mb-8 border-b dark:border-gray-700 pb-6">
-                        <h3 class="text-3xl font-bold mb-2">{{ selectedProject.title }}</h3>
-                        <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                <div v-if="selectedProject" class="w-full max-w-4xl mx-auto text-gray-900 dark:text-white">
+                    <!-- 모달 헤더 -->
+                    <div class="mb-6 sm:mb-8 border-b dark:border-gray-700 pb-4 sm:pb-6">
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-2">{{ selectedProject.title }}</h3>
+                        <div
+                            class="flex flex-wrap items-center gap-3 sm:gap-4 text-sm text-gray-500 dark:text-gray-400">
                             <span class="flex items-center gap-2">
                                 <i class="far fa-calendar"></i>
                                 {{ selectedProject.period }}
@@ -199,60 +202,70 @@
                         </div>
                     </div>
 
-                    <ImageSlider :images="selectedProject.screenshots" :title="selectedProject.title"
-                        v-model="currentImageIndex" @open-modal="openImageModal" />
+                    <!-- 이미지 슬라이더 -->
+                    <div class="mb-6 sm:mb-8">
+                        <ImageSlider :images="selectedProject.screenshots" :title="selectedProject.title"
+                            v-model="currentImageIndex" @open-modal="openImageModal"
+                            class="max-h-[300px] sm:max-h-[400px] rounded-lg overflow-hidden" />
+                    </div>
 
-                    <ImageModal :is-open="isImageModalOpen" :images="selectedProject.screenshots"
-                        :title="selectedProject.title" v-model="currentImageIndex" @close="closeImageModal" />
-
-                    <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-6 mb-8">
-                        <p class="whitespace-pre-line text-gray-600 dark:text-gray-300">
+                    <!-- 프로젝트 설명 -->
+                    <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
+                        <p class="whitespace-pre-line text-sm sm:text-base text-gray-600 dark:text-gray-300">
                             {{ selectedProject.fullDescription }}
                         </p>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-8 mb-8">
-                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-                            <h4 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <!-- 주요 기능 & 사용 기술 -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 mb-6 sm:mb-8">
+                        <!-- 주요 기능 -->
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-sm">
+                            <h4 class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2">
                                 <i class="fas fa-list text-blue-600"></i>
                                 주요 기능
                             </h4>
-                            <ul class="space-y-3">
-                                <li v-for="feature in selectedProject.features" :key="feature" class="flex items-start">
+                            <ul class="space-y-2 sm:space-y-3">
+                                <li v-for="feature in selectedProject.features" :key="feature"
+                                    class="flex items-start text-sm sm:text-base">
                                     <span class="text-blue-500 mr-2">›</span>
                                     <span>{{ feature }}</span>
                                 </li>
                             </ul>
                         </div>
 
-                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-                            <h4 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <!-- 사용 기술 -->
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-sm">
+                            <h4 class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2">
                                 <i class="fas fa-code text-blue-600"></i>
                                 사용 기술
                             </h4>
                             <div class="flex flex-wrap gap-2">
                                 <span v-for="tech in selectedProject.technologies" :key="tech"
-                                    class="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full text-sm">
+                                    class="px-2 sm:px-3 py-1 sm:py-1.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full text-xs sm:text-sm">
                                     {{ tech }}
                                 </span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex gap-4 pt-6 border-t dark:border-gray-700">
+                    <!-- 버튼 그룹 -->
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6 border-t dark:border-gray-700">
                         <a v-if="selectedProject.liveLink" :href="selectedProject.liveLink" target="_blank"
-                            class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            class="flex-1 flex items-center justify-center gap-2 px-4 sm:px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base">
                             <i class="fas fa-external-link-alt"></i>
                             Live
                         </a>
                         <a :href="selectedProject.githubLink" target="_blank"
-                            class="flex items-center gap-2 px-6 py-3 border border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                            class="flex-1 flex items-center justify-center gap-2 px-4 sm:px-6 py-3 border border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors text-sm sm:text-base">
                             <i class="fab fa-github"></i>
                             GitHub
                         </a>
                     </div>
                 </div>
             </Modal>
+
+            <ImageModal :is-open="isImageModalOpen" :images="selectedProject?.screenshots || []"
+                :title="selectedProject?.title" v-model="currentImageIndex" @close="closeImageModal" />
         </div>
     </section>
 </template>

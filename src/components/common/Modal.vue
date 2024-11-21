@@ -29,14 +29,18 @@
 </template>
 
 <script setup>
-import { watch, onUnmounted } from 'vue'
+import { watch, onUnmounted, computed } from 'vue'
 import { useScrollLock } from '../composables/useScrollLock'
+import { useModalNavigation } from '../composables/useModal'
 
 const props = defineProps({
     isOpen: {
         type: Boolean,
         required: true
-    }
+    },
+    images: Array,
+    title: String,
+    modelValue: Number
 })
 
 const emit = defineEmits(['close'])
@@ -46,11 +50,19 @@ const closeModal = () => {
     emit('close')
 }
 
+// 모달 네비게이션 설정
+const { addModalToHistory, removeModalFromHistory } = useModalNavigation(
+    computed(() => props.isOpen),
+    closeModal, 'project'
+)
+
 watch(() => props.isOpen, (newValue) => {
     if (newValue) {
         lockScroll()
+        addModalToHistory()
     } else {
         unlockScroll()
+        removeModalFromHistory()
     }
 })
 
