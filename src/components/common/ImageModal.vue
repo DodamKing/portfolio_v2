@@ -12,15 +12,10 @@
                 <div ref="dragArea" class="relative touch-none"
                     :class="{ 'cursor-grab': scale > 1 && !isDragging, 'cursor-grabbing': isDragging }"
                     :style="{ transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)` }"
-                    @mousedown.prevent="startDrag" 
-                    @touchstart.prevent="handleTouchStart">
-                    <img ref="imageRef" 
-                        :src="images[modelValue]" 
-                        :alt="`${title} screenshot ${modelValue + 1}`"
+                    @mousedown.prevent="startDrag" @touchstart.prevent="handleTouchStart">
+                    <img ref="imageRef" :src="images[modelValue]" :alt="`${title} screenshot ${modelValue + 1}`"
                         class="max-w-[100vw] max-h-[100vh] w-auto h-auto object-contain select-none"
-                        @dblclick="toggleZoom" 
-                        @load="onImageLoad" 
-                        @dragstart.prevent />
+                        @dblclick="toggleZoom" @load="onImageLoad" @dragstart.prevent />
                 </div>
 
                 <!-- 네비게이션 화살표 - 모바일에서는 스와이프로 대체 -->
@@ -37,19 +32,20 @@
                 </template>
 
                 <!-- 상단 컨트롤 -->
-                <div class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center bg-gradient-to-b from-black/50 to-transparent">
+                <div
+                    class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center bg-gradient-to-b from-black/50 to-transparent">
                     <div class="text-white text-sm">
                         <span v-if="title" class="mr-4">{{ title }}</span>
                         <span v-if="images.length > 1">{{ modelValue + 1 }} / {{ images.length }}</span>
                     </div>
-                    <button @click="$emit('close')"
-                        class="p-2 text-white hover:text-gray-300 transition-colors">
+                    <button @click="$emit('close')" class="p-2 text-white hover:text-gray-300 transition-colors">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
 
                 <!-- 하단 컨트롤 -->
-                <div class="absolute bottom-0 left-0 right-0 p-4 flex justify-center items-center bg-gradient-to-t from-black/50 to-transparent">
+                <div
+                    class="absolute bottom-0 left-0 right-0 p-4 flex justify-center items-center bg-gradient-to-t from-black/50 to-transparent">
                     <div class="flex gap-4">
                         <button @click="zoomOut"
                             class="p-2 text-white hover:text-gray-300 transition-colors disabled:opacity-50"
@@ -113,12 +109,7 @@ const imageSize = ref({ width: 0, height: 0 })
 const containerSize = ref({ width: 0, height: 0 })
 
 // 터치 관련 상태
-const initialPinchDistance = ref(0)
-const initialScale = ref(1)
 const lastTouchTime = ref(0)
-const pinchCenter = ref({ x: 0, y: 0 })
-const initialTouchDistance = ref(0)
-const initialTouchCenter = ref({ x: 0, y: 0 })
 
 const isLoading = ref(false)
 
@@ -134,7 +125,7 @@ const previousIndex = computed(() =>
 const preloadImages = () => {
     const nextImg = new Image()
     const prevImg = new Image()
-    
+
     if (props.images[nextIndex.value]) {
         nextImg.src = props.images[nextIndex.value]
     }
@@ -157,7 +148,7 @@ const onImageLoad = () => {
             width: containerRect.width,
             height: containerRect.height
         }
-        
+
         isLoading.value = false
         resetZoom()
         preloadImages() // 다음/이전 이미지 프리로드
@@ -183,35 +174,13 @@ const handleTouchStart = (e) => {
     const now = Date.now()
     const timeDiff = now - lastTouchTime.value
 
-    if (timeDiff < 300) {  // 더블 탭 감지
+    if (timeDiff < 300) {  // 더블 탭
         toggleZoom()
         e.preventDefault()
         lastTouchTime.value = 0
         return
     }
     lastTouchTime.value = now
-
-    if (e.touches.length === 2) {
-        // 핀치 줌 시작 시 중심점 계산
-        const touch1 = e.touches[0]
-        const touch2 = e.touches[1]
-        
-        initialTouchDistance.value = getPinchDistance(e.touches)
-        initialTouchCenter.value = {
-            x: (touch1.clientX + touch2.clientX) / 2,
-            y: (touch1.clientY + touch2.clientY) / 2
-        }
-        initialScale.value = scale.value
-        
-        // 컨테이너 기준 상대 위치 계산
-        const rect = containerRef.value.getBoundingClientRect()
-        pinchCenter.value = {
-            x: (initialTouchCenter.value.x - rect.left) / scale.value,
-            y: (initialTouchCenter.value.y - rect.top) / scale.value
-        }
-        
-        return
-    }
 
     // 단일 터치 (드래그 또는 스와이프)
     const touch = e.touches[0]
@@ -231,36 +200,6 @@ const handleTouchStart = (e) => {
 
 const handleTouchMove = (e) => {
     e.preventDefault()
-
-    if (e.touches.length === 2) {
-        const touch1 = e.touches[0]
-        const touch2 = e.touches[1]
-        const currentDistance = getPinchDistance(e.touches)
-        const currentCenter = {
-            x: (touch1.clientX + touch2.clientX) / 2,
-            y: (touch1.clientY + touch2.clientY) / 2
-        }
-        
-        // 스케일 변화량 계산
-        const scaleDelta = currentDistance / initialTouchDistance.value
-        const newScale = Math.min(Math.max(initialScale.value * scaleDelta, MIN_SCALE), MAX_SCALE)
-        
-        if (newScale !== scale.value) {
-            // 핀치 중심점 기준으로 위치 조정
-            const rect = containerRef.value.getBoundingClientRect()
-            const dx = (currentCenter.x - initialTouchCenter.value.x) / newScale
-            const dy = (currentCenter.y - initialTouchCenter.value.y) / newScale
-            
-            scale.value = newScale
-            
-            const bounds = calculateBounds()
-            position.value = {
-                x: Math.max(Math.min(startPosition.value.x + dx, bounds.right), -bounds.right),
-                y: Math.max(Math.min(startPosition.value.y + dy, bounds.bottom), -bounds.bottom)
-            }
-        }
-        return
-    }
 
     if (!isDragging.value || scale.value <= 1) return
 
@@ -292,7 +231,6 @@ const handleTouchEnd = (e) => {
     }
 
     isDragging.value = false
-    initialPinchDistance.value = 0
     document.removeEventListener('touchmove', handleTouchMove)
     document.removeEventListener('touchend', handleTouchEnd)
 }
@@ -335,14 +273,6 @@ const stopDrag = () => {
     isDragging.value = false
     document.removeEventListener('mousemove', onDrag)
     document.removeEventListener('mouseup', stopDrag)
-}
-
-// 핀치 거리 계산
-const getPinchDistance = (touches) => {
-    return Math.hypot(
-        touches[1].clientX - touches[0].clientX,
-        touches[1].clientY - touches[0].clientY
-    )
 }
 
 // 줌 관련 함수
