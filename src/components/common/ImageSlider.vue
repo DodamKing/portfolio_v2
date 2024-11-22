@@ -3,8 +3,14 @@
     <div @touchstart="handleTouchStart" @touchend="handleTouchEnd" class="relative w-full max-w-4xl mx-auto">
         <!-- 메인 이미지 컨테이너 -->
         <div class="relative aspect-video bg-gray-900 rounded-lg overflow-hidden">
+            <!-- 로딩 인디케이터 -->
+            <div v-if="isLoading" class="absolute inset-0 z-10 flex items-center justify-center bg-black/30">
+                <div class="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+            </div>
+
             <img :src="images[currentIndex]" :alt="`${title} screenshot ${currentIndex + 1}`"
-                class="w-full h-full object-contain cursor-pointer" @click="$emit('openModal', currentIndex)" />
+                class="w-full h-full object-contain cursor-pointer transition-opacity duration-200"
+                :class="{ 'opacity-0': isLoading }" @click="$emit('openModal', currentIndex)" @load="handleImageLoad" />
 
             <!-- 네비게이션 화살표 -->
             <button @click.stop="goToPrevious"
@@ -46,6 +52,8 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 const touchStartX = ref(0)
 const touchEndX = ref(0)
+const isLoading = ref(true)
+const loadedImages = ref(new Set())
 
 const props = defineProps({
     images: {
@@ -70,19 +78,28 @@ const currentIndex = computed({
 })
 
 const goToNext = () => {
+    isLoading.value = !loadedImages.value.has(props.images[
+        (currentIndex.value + 1) % props.images.length
+    ])
     currentIndex.value = currentIndex.value === props.images.length - 1
         ? 0
         : currentIndex.value + 1
 }
 
 const goToPrevious = () => {
+    isLoading.value = !loadedImages.value.has(props.images[
+        currentIndex.value === 0 ? props.images.length - 1 : currentIndex.value - 1
+    ])
     currentIndex.value = currentIndex.value === 0
         ? props.images.length - 1
         : currentIndex.value - 1
 }
 
 const goToIndex = (index) => {
-    currentIndex.value = index
+    if (index !== currentIndex.value) {
+        isLoading.value = !loadedImages.value.has(props.images[index])
+        currentIndex.value = index
+    }
 }
 
 // 키보드 네비게이션
@@ -102,7 +119,7 @@ const handleTouchStart = (e) => {
 const handleTouchEnd = (e) => {
     touchEndX.value = e.changedTouches[0].clientX
     const swipeDistance = touchEndX.value - touchStartX.value
-    
+
     if (Math.abs(swipeDistance) > 50) { // 최소 스와이프 거리
         if (swipeDistance > 0) {
             goToPrevious()
@@ -112,8 +129,29 @@ const handleTouchEnd = (e) => {
     }
 }
 
+// 이미지 프리로딩
+const preloadNextImage = () => {
+    const nextIndex = (currentIndex.value + 1) % props.images.length
+    const prevIndex = currentIndex.value === 0 ? props.images.length - 1 : currentIndex.value - 1
+    
+    ;[nextIndex, prevIndex].forEach(index => {
+        if (!loadedImages.value.has(props.images[index])) {
+            const img = new Image()
+            img.src = props.images[index]
+        }
+    })
+}
+
+// 이미지 로드 핸들러
+const handleImageLoad = () => {
+    loadedImages.value.add(props.images[currentIndex.value])
+    isLoading.value = false
+    preloadNextImage()
+}
+
 onMounted(() => {
     window.addEventListener('keydown', handleKeydown)
+    isLoading.value = !loadedImages.value.has(props.images[currentIndex.value])
 })
 
 onUnmounted(() => {

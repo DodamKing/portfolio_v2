@@ -3,6 +3,11 @@
         <div v-if="isOpen" class="fixed inset-0 z-[9999] bg-black">
             <!-- 이미지 뷰어 영역 -->
             <div ref="containerRef" class="relative w-full h-full flex items-center justify-center">
+                <!-- 로딩 인디케이터 -->
+                <div v-if="isLoading" class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                </div>
+
                 <!-- 메인 이미지 -->
                 <div ref="dragArea" class="relative touch-none"
                     :class="{ 'cursor-grab': scale > 1 && !isDragging, 'cursor-grabbing': isDragging }"
@@ -111,6 +116,11 @@ const containerSize = ref({ width: 0, height: 0 })
 const initialPinchDistance = ref(0)
 const initialScale = ref(1)
 const lastTouchTime = ref(0)
+const pinchCenter = ref({ x: 0, y: 0 })
+const initialTouchDistance = ref(0)
+const initialTouchCenter = ref({ x: 0, y: 0 })
+
+const isLoading = ref(false)
 
 // 인덱스 계산
 const nextIndex = computed(() =>
@@ -119,6 +129,19 @@ const nextIndex = computed(() =>
 const previousIndex = computed(() =>
     props.modelValue === 0 ? props.images.length - 1 : props.modelValue - 1
 )
+
+// 이미지 프리로딩
+const preloadImages = () => {
+    const nextImg = new Image()
+    const prevImg = new Image()
+    
+    if (props.images[nextIndex.value]) {
+        nextImg.src = props.images[nextIndex.value]
+    }
+    if (props.images[previousIndex.value]) {
+        prevImg.src = props.images[previousIndex.value]
+    }
+}
 
 // 이미지 로드 핸들러
 const onImageLoad = () => {
@@ -134,7 +157,10 @@ const onImageLoad = () => {
             width: containerRect.width,
             height: containerRect.height
         }
+        
+        isLoading.value = false
         resetZoom()
+        preloadImages() // 다음/이전 이미지 프리로드
     }
 }
 
@@ -166,12 +192,24 @@ const handleTouchStart = (e) => {
     lastTouchTime.value = now
 
     if (e.touches.length === 2) {
-        // 핀치 줌 시작
-        initialPinchDistance.value = getPinchDistance(e.touches)
+        // 핀치 줌 시작 시 중심점 계산
+        const touch1 = e.touches[0]
+        const touch2 = e.touches[1]
+        
+        initialTouchDistance.value = getPinchDistance(e.touches)
+        initialTouchCenter.value = {
+            x: (touch1.clientX + touch2.clientX) / 2,
+            y: (touch1.clientY + touch2.clientY) / 2
+        }
         initialScale.value = scale.value
         
-        // 시작 위치 저장
-        startPosition.value = { ...position.value }
+        // 컨테이너 기준 상대 위치 계산
+        const rect = containerRef.value.getBoundingClientRect()
+        pinchCenter.value = {
+            x: (initialTouchCenter.value.x - rect.left) / scale.value,
+            y: (initialTouchCenter.value.y - rect.top) / scale.value
+        }
+        
         return
     }
 
@@ -195,35 +233,32 @@ const handleTouchMove = (e) => {
     e.preventDefault()
 
     if (e.touches.length === 2) {
-        // 핀치 줌 처리
+        const touch1 = e.touches[0]
+        const touch2 = e.touches[1]
         const currentDistance = getPinchDistance(e.touches)
-        const pinchScale = currentDistance / initialPinchDistance.value
-        
-        // 이전 스케일을 기준으로 부드러운 확대/축소
-        const newScale = initialScale.value * pinchScale
-        
-        // MIN_SCALE과 MAX_SCALE 사이의 값으로 제한
-        scale.value = Math.min(Math.max(newScale, MIN_SCALE), MAX_SCALE)
-
-        // 핀치 줌 중심점 계산
-        const center = {
-            x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
-            y: (e.touches[0].clientY + e.touches[1].clientY) / 2
-        }
-
-        // 줌 중심점 기준으로 위치 조정
-        const bounds = calculateBounds()
-        position.value = {
-            x: Math.max(Math.min(
-                (center.x - containerRef.value.offsetWidth / 2) / scale.value,
-                bounds.right
-            ), -bounds.right),
-            y: Math.max(Math.min(
-                (center.y - containerRef.value.offsetHeight / 2) / scale.value,
-                bounds.bottom
-            ), -bounds.bottom)
+        const currentCenter = {
+            x: (touch1.clientX + touch2.clientX) / 2,
+            y: (touch1.clientY + touch2.clientY) / 2
         }
         
+        // 스케일 변화량 계산
+        const scaleDelta = currentDistance / initialTouchDistance.value
+        const newScale = Math.min(Math.max(initialScale.value * scaleDelta, MIN_SCALE), MAX_SCALE)
+        
+        if (newScale !== scale.value) {
+            // 핀치 중심점 기준으로 위치 조정
+            const rect = containerRef.value.getBoundingClientRect()
+            const dx = (currentCenter.x - initialTouchCenter.value.x) / newScale
+            const dy = (currentCenter.y - initialTouchCenter.value.y) / newScale
+            
+            scale.value = newScale
+            
+            const bounds = calculateBounds()
+            position.value = {
+                x: Math.max(Math.min(startPosition.value.x + dx, bounds.right), -bounds.right),
+                y: Math.max(Math.min(startPosition.value.y + dy, bounds.bottom), -bounds.bottom)
+            }
+        }
         return
     }
 
@@ -365,7 +400,7 @@ watch([() => props.modelValue, () => props.isOpen], ([newModelValue, newIsOpen],
     if (newModelValue !== oldModelValue) {
         resetZoom()
     }
-    
+
     // 모달이 열리고 닫힐 때
     if (newIsOpen !== oldIsOpen) {
         if (newIsOpen) {
@@ -373,6 +408,14 @@ watch([() => props.modelValue, () => props.isOpen], ([newModelValue, newIsOpen],
         } else {
             removeModalFromHistory()
         }
+    }
+})
+
+// 이미지 전환 시 로딩 상태 처리
+watch(() => props.modelValue, (newVal, oldVal) => {
+    if (newVal !== oldVal) {
+        isLoading.value = true
+        resetZoom()
     }
 })
 
@@ -404,5 +447,9 @@ onUnmounted(() => {
 .fade-enter-from,
 .fade-leave-to {
     opacity: 0;
+}
+
+img {
+    transition: opacity 0.2s ease;
 }
 </style>

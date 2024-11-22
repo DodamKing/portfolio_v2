@@ -241,6 +241,9 @@ export const projects = [
             
             JSP와 Spring Framework를 기반으로 개발되었으며,
             사용자별 플레이리스트 기능으로 개인화된 음악 경험을 제공합니다.
+
+            * 서버가 불안정 하여 접속이 잘 안될 수 있습니다.
+            * 모바일 대응이 전혀 되어 있지 않아 pc에서 접속하길 권합니다
         `,
         image: getImageUrl('ddmusic.png'),
         screenshots: getScreenshots([
@@ -254,6 +257,7 @@ export const projects = [
             '실시간 음원 차트',
             '커스텀 웹 플레이어',
             '플레이리스트 관리',
+            '게시판',
         ],
         liveLink: 'http://49.142.157.251:9090/cjs2108_kdd',
         githubLink: 'https://github.com/DodamKing/DDMusic'
