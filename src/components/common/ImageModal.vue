@@ -95,7 +95,7 @@ const imageRef = ref(null)
 // 상수
 const MIN_SCALE = 1
 const MAX_SCALE = 3
-const SCALE_STEP = 0.5
+const SCALE_STEP = 0.25
 const SWIPE_THRESHOLD = 50
 
 // 상태
@@ -110,6 +110,9 @@ const containerSize = ref({ width: 0, height: 0 })
 
 // 터치 관련 상태
 const lastTouchTime = ref(0)
+const initialPinchDistance = ref(0)
+const initialScale = ref(1)
+const initialTouchCenter = ref({ x: 0, y: 0 })
 
 const isLoading = ref(false)
 
@@ -171,28 +174,45 @@ const calculateBounds = () => {
 // 터치 이벤트 핸들러
 const handleTouchStart = (e) => {
     e.preventDefault()
-    const now = Date.now()
-    const timeDiff = now - lastTouchTime.value
 
-    if (timeDiff < 300) {  // 더블 탭
-        toggleZoom()
-        e.preventDefault()
-        lastTouchTime.value = 0
+    if (e.touches.length === 2) {
+        // 핀치줌 시작
+        const touch1 = e.touches[0]
+        const touch2 = e.touches[1]
+        
+        initialPinchDistance.value = getPinchDistance(e.touches)
+        initialTouchCenter.value = {
+            x: (touch1.clientX + touch2.clientX) / 2,
+            y: (touch1.clientY + touch2.clientY) / 2
+        }
+        initialScale.value = scale.value
         return
     }
-    lastTouchTime.value = now
+    
+    // 손가락이 한 개일 때만 더블탭 체크
+    if (e.touches.length === 1) {
+        const now = Date.now()
+        const timeDiff = now - lastTouchTime.value
 
-    // 단일 터치 (드래그 또는 스와이프)
-    const touch = e.touches[0]
-    dragStart.value = {
-        x: touch.clientX,
-        y: touch.clientY
+        if (timeDiff < 300) {  // 더블 탭
+            toggleZoom()
+            lastTouchTime.value = 0
+            return
+        }
+        lastTouchTime.value = now
+
+        // 드래그/스와이프 시작
+        const touch = e.touches[0]
+        dragStart.value = {
+            x: touch.clientX,
+            y: touch.clientY
+        }
+        startPosition.value = {
+            x: position.value.x,
+            y: position.value.y
+        }
+        isDragging.value = true
     }
-    startPosition.value = {
-        x: position.value.x,
-        y: position.value.y
-    }
-    isDragging.value = true
 
     document.addEventListener('touchmove', handleTouchMove, { passive: false })
     document.addEventListener('touchend', handleTouchEnd)
@@ -201,8 +221,40 @@ const handleTouchStart = (e) => {
 const handleTouchMove = (e) => {
     e.preventDefault()
 
+    if (e.touches.length === 2) {
+        // 핀치줌 처리
+        const currentDistance = getPinchDistance(e.touches)
+        const touch1 = e.touches[0]
+        const touch2 = e.touches[1]
+        const currentCenter = {
+            x: (touch1.clientX + touch2.clientX) / 2,
+            y: (touch1.clientY + touch2.clientY) / 2
+        }
+        
+        // 스케일 계산
+        const scaleDelta = currentDistance / initialPinchDistance.value
+        const newScale = Math.min(Math.max(initialScale.value * scaleDelta, MIN_SCALE), MAX_SCALE)
+        
+        if (newScale !== scale.value) {
+            // 중심점 기준으로 확대/축소
+            const rect = containerRef.value.getBoundingClientRect()
+            const dx = (currentCenter.x - initialTouchCenter.value.x) / newScale
+            const dy = (currentCenter.y - initialTouchCenter.value.y) / newScale
+            
+            scale.value = newScale
+            
+            const bounds = calculateBounds()
+            position.value = {
+                x: Math.max(Math.min(startPosition.value.x + dx, bounds.right), -bounds.right),
+                y: Math.max(Math.min(startPosition.value.y + dy, bounds.bottom), -bounds.bottom)
+            }
+        }
+        return
+    }
+
     if (!isDragging.value || scale.value <= 1) return
 
+    // 한 손가락 드래그 처리
     const touch = e.touches[0]
     const dx = touch.clientX - dragStart.value.x
     const dy = touch.clientY - dragStart.value.y
@@ -215,24 +267,35 @@ const handleTouchMove = (e) => {
 }
 
 const handleTouchEnd = (e) => {
-    if (!isDragging.value) return
+    if (e.touches.length === 0) { // 모든 터치가 끝났을 때
+        if (isDragging.value) {
+            const touch = e.changedTouches[0]
+            const dx = touch.clientX - dragStart.value.x
+            const dy = Math.abs(touch.clientY - dragStart.value.y)
 
-    const touch = e.changedTouches[0]
-    const dx = touch.clientX - dragStart.value.x
-    const dy = Math.abs(touch.clientY - dragStart.value.y)
-
-    // 수평 스와이프가 수직 이동보다 크고, 확대되지 않은 상태일 때만 이미지 전환
-    if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > dy && scale.value === 1) {
-        if (dx > 0) {
-            emit('update:modelValue', previousIndex.value)
-        } else {
-            emit('update:modelValue', nextIndex.value)
+            // 스와이프 처리 (확대되지 않은 상태에서만)
+            if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > dy && scale.value === 1) {
+                if (dx > 0) {
+                    emit('update:modelValue', previousIndex.value)
+                } else {
+                    emit('update:modelValue', nextIndex.value)
+                }
+            }
         }
+        
+        isDragging.value = false
+        initialPinchDistance.value = 0
+        document.removeEventListener('touchmove', handleTouchMove)
+        document.removeEventListener('touchend', handleTouchEnd)
     }
+}
 
-    isDragging.value = false
-    document.removeEventListener('touchmove', handleTouchMove)
-    document.removeEventListener('touchend', handleTouchEnd)
+// 핀치 거리 계산 함수
+const getPinchDistance = (touches) => {
+    return Math.hypot(
+        touches[1].clientX - touches[0].clientX,
+        touches[1].clientY - touches[0].clientY
+    )
 }
 
 // 마우스 드래그 핸들러 (데스크톱)
@@ -300,7 +363,7 @@ const toggleZoom = () => {
     if (scale.value > 1) {
         resetZoom()
     } else {
-        scale.value = 2
+        scale.value = MAX_SCALE
     }
 }
 
