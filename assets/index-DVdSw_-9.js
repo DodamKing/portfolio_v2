@@ -77,7 +77,9 @@
             • 끊김 없는 고품질 스트리밍 제공
             • 개인 맞춤 플레이리스트 관리
             • 구글/카카오 계정으로 간편 로그인
-        `,image:Ft("dibe2/dibe2.png"),screenshots:Kt(["dibe2/dibe2_1.png","dibe2/dibe2.png","dibe2/dibe2_2.png","dibe2/dibe2_3.png","dibe2/dibe2_4.png","dibe2/dibe2_5.png","dibe2/dibe2_6.png","dibe2/dibe2_7.png","dibe2/dibe2_8.png"]),technologies:["Nuxt 2","Express.js","Express Middleware","MongoDB Atlas","AWS EC2","Nginx","PM2"],features:["커스텀 미디어 컨트롤러가 적용된 웹 플레이어","실시간 음원 차트 자동 업데이트","개인화된 플레이리스트 관리","소셜 로그인(Google, Kakao) 지원","관리자 대시보드(음원/사용자 관리, 통계)","방문자 통계 및 스트리밍 분석"],liveLink:"https://dibe2.dimad.site",githubLink:"https://github.com/dodamking/dibe2"},{id:3,title:"StockMaster",type:"Personal",category:"Financial Tech",period:"2024.06 - 2024.06",shortDescription:"포트폴리오 모니터링 및 리밸런싱 자동화 앱",fullDescription:`
+
+            ※ 비용 문제로 서비스를 중지하였습니다.
+        `,image:Ft("dibe2/dibe2.png"),screenshots:Kt(["dibe2/dibe2_1.png","dibe2/dibe2.png","dibe2/dibe2_2.png","dibe2/dibe2_3.png","dibe2/dibe2_4.png","dibe2/dibe2_5.png","dibe2/dibe2_6.png","dibe2/dibe2_7.png","dibe2/dibe2_8.png"]),technologies:["Nuxt 2","Express.js","Express Middleware","MongoDB Atlas","AWS EC2","Nginx","PM2"],features:["커스텀 미디어 컨트롤러가 적용된 웹 플레이어","실시간 음원 차트 자동 업데이트","개인화된 플레이리스트 관리","소셜 로그인(Google, Kakao) 지원","관리자 대시보드(음원/사용자 관리, 통계)","방문자 통계 및 스트리밍 분석"],githubLink:"https://github.com/dodamking/dibe2"},{id:3,title:"StockMaster",type:"Personal",category:"Financial Tech",period:"2024.06 - 2024.06",shortDescription:"포트폴리오 모니터링 및 리밸런싱 자동화 앱",fullDescription:`
             내 투자 현황을 한눈에 파악하고 효율적으로 관리할 수 있는 포트폴리오 관리 앱입니다.
 
             • 실시간 주식 데이터 연동으로 정확한 포트폴리오 가치 평가
