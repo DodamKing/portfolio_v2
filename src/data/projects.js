@@ -140,8 +140,6 @@ export const projects = [
             • 끊김 없는 고품질 스트리밍 제공
             • 개인 맞춤 플레이리스트 관리
             • 구글/카카오 계정으로 간편 로그인
-
-            ※ 도메인 비용 문제로 SSL 인증을 받지 못해 HTTP로 서비스를 제공하고 있습니다.
         `,
         image: getImageUrl('dibe2/dibe2.png'),
         screenshots: getScreenshots([
@@ -164,8 +162,7 @@ export const projects = [
             '관리자 대시보드(음원/사용자 관리, 통계)',
             '방문자 통계 및 스트리밍 분석'
         ],
-        // liveLink: 'https://dibe2.dimad.site',
-        liveLink: 'http://3.39.122.169',
+        liveLink: 'https://dibe2.dimad.kr',
         githubLink: 'https://github.com/dodamking/dibe2'
     },
     {
