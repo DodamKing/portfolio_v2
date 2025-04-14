@@ -7,6 +7,47 @@ const getScreenshots = (images) => images.map(img => getImageUrl(img))
 
 export const projects = [
     {
+        id: 7,
+        title: '프로틴프라이스',
+        type: 'Personal',
+        category: 'Product Comparison Web',
+        period: '2025.03 - 현재',
+        shortDescription: '단백질 보충제 가격 추적 및 비교 서비스',
+        fullDescription: `
+            단백질 보충제의 가격 변동을 자동으로 추적하고,
+            보기 쉬운 그래프로 보여주는 실시간 비교 서비스입니다.
+
+            소비자 입장에서 가장 중요한 ‘가격’을 기준으로
+            언제 구매하는 것이 좋은지 판단할 수 있도록 만든 프로젝트입니다.
+
+            매일 가격 데이터를 수집하고, 브랜드별·성분별 비교는 물론
+            g당 단백질 단가 기준으로 정렬이 가능하여
+            실질적인 쇼핑 결정을 돕는 데 초점을 두었습니다.
+
+            클라이언트(사용자)가 모바일에서도 편리하게 이용할 수 있도록
+            반응형 UI를 구성하고, 속도와 안정성을 고려해
+            클라우드 서버 환경에 직접 배포해 운영 중입니다.
+        `,
+        image: getImageUrl('proteinprice/main.png'),
+        screenshots: getScreenshots([
+            'proteinprice/main.png',
+            'proteinprice/1.png',
+            'proteinprice/2.png',
+            'proteinprice/3.png',
+        ]),
+        technologies: ['Vue 3', 'Vite', 'Express.js', 'Node.js', 'AWS EC2', 'Nginx', 'MongoDB Atlas', 'Cheerio'],
+        features: [
+            '자동화된 가격 크롤링 및 DB 저장',
+            '가격 변동 시각화 그래프 제공',
+            'g당 단백질 가격 정렬 및 비교 기능',
+            '검색/필터링을 통한 제품 탐색',
+            '모바일 반응형 UI',
+            'Express 기반 서버와 EC2 배포 환경 구성',
+            'SEO 최적화로 검색 유입 고려',
+        ],
+        liveLink: 'https://protein.dimad.kr',
+    },
+    {
         id: 6,
         title: '최고의 계산기 모음',
         type: 'Personal',
