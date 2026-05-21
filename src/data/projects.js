@@ -11,7 +11,7 @@ export const projects = [
         title: '프로틴프라이스',
         type: 'Personal',
         category: 'Product Comparison Web',
-        period: '2025.03 - 현재',
+        period: '2025.03 - 2025.06',
         shortDescription: '단백질 보충제 가격 추적 및 비교 서비스',
         fullDescription: `
             단백질 보충제의 가격 변동을 자동으로 추적하고,

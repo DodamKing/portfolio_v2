@@ -8,10 +8,11 @@
             <!-- 모바일: 스와이프 캐러셀 -->
             <div class="md:hidden">
                 <div ref="carouselRef" class="overflow-x-auto snap-x snap-mandatory hide-scrollbar"
-                    @touchstart="handleTouchStart" @touchmove="handleTouchMove" @touchend="handleTouchEnd">
+                    @scroll.passive="handleScroll">
                     <div class="flex gap-4">
                         <div v-for="project in projects" :key="project.id"
-                            class="snap-start w-[85vw] flex-shrink-0 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                            :style="{ width: cardWidth + 'px' }"
+                            class="snap-start flex-shrink-0 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
                             <!-- 이미지 섹션 -->
                             <div class="relative overflow-hidden h-48 cursor-pointer"
                                 @click="showProjectDetails(project)">
@@ -80,6 +81,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="flex-shrink-0" :style="{ width: trailingSpace + 'px' }" aria-hidden="true"></div>
                     </div>
                 </div>
 
@@ -279,8 +281,14 @@ import { projects } from '@/data/projects';
 
 const carouselRef = ref(null)
 const currentSlide = ref(0)
-const touchStart = ref(0)
-const touchStartY = ref(0)
+const containerWidth = ref(0)
+
+const SLIDE_GAP = 16 // tailwind gap-4
+const CARD_RATIO = 0.85
+
+const cardWidth = computed(() => containerWidth.value * CARD_RATIO)
+const slideStep = computed(() => cardWidth.value + SLIDE_GAP)
+const trailingSpace = computed(() => Math.max(0, containerWidth.value - cardWidth.value))
 
 const getItemsPerPage = () => {
     if (window.innerWidth < 640) return 2;  // 모바일
@@ -301,52 +309,16 @@ const displayedProjects = computed(() => {
     return projects.slice(start, start + ITEMS_PER_PAGE.value)
 })
 
-const handleTouchStart = (e) => {
-    touchStart.value = e.touches[0].clientX
-    touchStartY.value = e.touches[0].clientY
-}
-
-const handleTouchMove = (e) => {
-    if (!touchStart.value) return
-
-    // 현재 터치 위치
-    const touchX = e.touches[0].clientX
-    const touchY = e.touches[0].clientY
-    const deltaX = touchStart.value - touchX
-    const deltaY = Math.abs(e.touches[0].clientY - touchStartY.value)
-
-    // 수평 스와이프가 수직 이동보다 큰 경우에만 preventDefault
-    if (Math.abs(deltaX) > deltaY) {
-        e.preventDefault()
-    }
-}
-
-const handleTouchEnd = (e) => {
-    if (!touchStart.value) return
-
-    const touchEnd = e.changedTouches[0].clientX
-    const diff = touchStart.value - touchEnd
-
-    if (Math.abs(diff) > 50) { // 최소 스와이프 거리
-        if (diff > 0 && currentSlide.value < projects.length - 1) {
-            currentSlide.value++
-        } else if (diff < 0 && currentSlide.value > 0) {
-            currentSlide.value--
-        }
-    }
-
-    touchStart.value = 0
-    scrollToSlide()
-}
-
-const scrollToSlide = () => {
+const measureContainer = () => {
     if (carouselRef.value) {
-        const slideWidth = carouselRef.value.offsetWidth * 0.85 + 16 // width + gap
-        carouselRef.value.scrollTo({
-            left: slideWidth * currentSlide.value,
-            behavior: 'smooth'
-        })
+        containerWidth.value = carouselRef.value.offsetWidth
     }
+}
+
+const handleScroll = () => {
+    if (!slideStep.value || !carouselRef.value) return
+    const index = Math.round(carouselRef.value.scrollLeft / slideStep.value)
+    currentSlide.value = Math.max(0, Math.min(index, projects.length - 1))
 }
 
 const showProjectDetails = (project) => {
@@ -375,17 +347,29 @@ const nextPage = () => {
     if (currentPage.value < totalPages.value) currentPage.value++
 }
 
+let resizeObserver = null
+
+const handleResize = () => {
+    measureContainer()
+    ITEMS_PER_PAGE.value = getItemsPerPage()
+}
+
 onMounted(() => {
-    window.addEventListener('resize', () => {
-        ITEMS_PER_PAGE.value = getItemsPerPage();
-    });
-});
+    measureContainer()
+    window.addEventListener('resize', handleResize)
+    if (typeof ResizeObserver !== 'undefined' && carouselRef.value) {
+        resizeObserver = new ResizeObserver(measureContainer)
+        resizeObserver.observe(carouselRef.value)
+    }
+})
 
 onUnmounted(() => {
-    window.removeEventListener('resize', () => {
-        ITEMS_PER_PAGE.value = getItemsPerPage();
-    });
-});
+    window.removeEventListener('resize', handleResize)
+    if (resizeObserver) {
+        resizeObserver.disconnect()
+        resizeObserver = null
+    }
+})
 
 // 프로젝트가 변경될 때도 초기화
 watch(() => selectedProject.value, () => {

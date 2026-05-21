@@ -18,17 +18,83 @@
                             <p class="text-gray-500 dark:text-gray-400 mt-1">2024.03 ~ Present | Full Stack Developer
                             </p>
                         </div>
-                        <span class="px-4 py-1.5 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 
+                        <span class="px-4 py-1.5 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300
                          text-sm rounded-full font-medium">Current</span>
                     </div>
 
                     <div class="space-y-8">
+                        <!-- AI 데이터센터 열관리 모니터링 인프라 -->
+                        <div class="relative pl-4 border-l-2 border-blue-500">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-1 sm:gap-4">
+                                <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                                    AI 데이터센터 열관리 모니터링 인프라 구축
+                                </h4>
+                                <span class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap flex items-center gap-1.5 shrink-0">
+                                    <i class="far fa-calendar"></i>
+                                    2026.03 ~ 현재
+                                </span>
+                            </div>
+                            <ul class="space-y-3 text-gray-600 dark:text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
+                                    <span>Modbus RTU·TCP 게이트웨이 기반 PDU·CDU 등 시설 자원 실시간 수집 파이프라인 단독 설계·구축</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
+                                    <span>PUE 등 데이터센터 운영 핵심 KPI 모니터링 시스템 개발 및 성능·안정성 운영 정책 의사결정 지원</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
+                                    <span>Kubernetes 기반 GPU·CPU 메트릭 수집 및 노드 부하 테스트 환경 구성</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
+                                    <span>내부 네트워크·운영 인프라 구축 및 장비 협력사 기술 협의</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 사내 포털 -->
+                        <div class="relative pl-4 border-l-2 border-blue-500">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-1 sm:gap-4">
+                                <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                                    사내 포털 시스템 구축
+                                </h4>
+                                <span class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap flex items-center gap-1.5 shrink-0">
+                                    <i class="far fa-calendar"></i>
+                                    2025.09 ~ 2026.02
+                                </span>
+                            </div>
+                            <ul class="space-y-3 text-gray-600 dark:text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
+                                    <span>도메인·서버·배포 환경 등 사내 포털 초기 인프라 전반 구축</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
+                                    <span>사내 Google Workspace 계정 기반 OAuth 로그인 연동</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
+                                    <span>Google Workspace Collaboration 연동 기반 구성</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
+                                    <span>공인 IP·포트 포워딩 기반 외부망 접근 환경 구성</span>
+                                </li>
+                            </ul>
+                        </div>
+
                         <!-- ERP 시스템 -->
                         <div class="relative pl-4 border-l-2 border-blue-500">
-                            <div class="flex justify-between items-start mb-3">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-1 sm:gap-4">
                                 <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
                                     사내 ERP 시스템 개발
                                 </h4>
+                                <span class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap flex items-center gap-1.5 shrink-0">
+                                    <i class="far fa-calendar"></i>
+                                    2025.01 ~ 2025.08
+                                </span>
                             </div>
                             <ul class="space-y-3 text-gray-600 dark:text-gray-300">
                                 <li class="flex items-start">
@@ -59,32 +125,16 @@
                             </div>
                         </div>
 
-                        <!-- 태양광 모니터링 -->
-                        <div class="relative pl-4 border-l-2 border-blue-500">
-                            <div class="flex justify-between items-start mb-3">
-                                <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                                    태양광 발전 모니터링 시스템
-                                </h4>
-                            </div>
-                            <ul class="space-y-3 text-gray-600 dark:text-gray-300">
-                                <li class="flex items-start">
-                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
-                                    <span>실시간 데이터 수집 및 처리 파이프라인 구축</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
-                                    <span>실시간 모니터링 대시보드 개발 및 알림 시스템 구현</span>
-                                </li>
-                            </ul>
-                        </div>
-
                         <!-- TMS -->
                         <div class="relative pl-4 border-l-2 border-blue-500">
-                            <div class="flex justify-between items-start mb-3">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-1 sm:gap-4">
                                 <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
                                     열관리 시스템(TMS) 개발
                                 </h4>
-                                <!-- <span class="text-sm text-blue-600 dark:text-blue-400">Full Stack Developer</span> -->
+                                <span class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap flex items-center gap-1.5 shrink-0">
+                                    <i class="far fa-calendar"></i>
+                                    2024.09 ~ 2024.12
+                                </span>
                             </div>
                             <ul class="space-y-3 text-gray-600 dark:text-gray-300">
                                 <li class="flex items-start">
@@ -98,6 +148,29 @@
                                 <li class="flex items-start">
                                     <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
                                     <span>AI 학습 결과 데이터 저장 및 조회 시스템 구축</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 태양광 모니터링 -->
+                        <div class="relative pl-4 border-l-2 border-blue-500">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-1 sm:gap-4">
+                                <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                                    태양광 발전 모니터링 시스템
+                                </h4>
+                                <span class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap flex items-center gap-1.5 shrink-0">
+                                    <i class="far fa-calendar"></i>
+                                    2024.03 ~ 2024.09
+                                </span>
+                            </div>
+                            <ul class="space-y-3 text-gray-600 dark:text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
+                                    <span>실시간 데이터 수집 및 처리 파이프라인 구축</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
+                                    <span>실시간 모니터링 대시보드 개발 및 알림 시스템 구현</span>
                                 </li>
                             </ul>
                         </div>

@@ -7,8 +7,8 @@
                 새로운 기회나 프로젝트 의뢰 및 협업에 대해 이야기하고 싶으시다면 언제든 연락주세요.
             </p>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- 왼쪽: 연락처 정보 -->
+            <div class="max-w-2xl mx-auto">
+                <!-- 연락처 정보 -->
                 <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg">
                     <h3 class="text-xl font-semibold p-6 text-gray-800 dark:text-gray-200">Contact Information</h3>
                     <div class="space-y-6 p-6">
@@ -57,50 +57,6 @@
                     </div>
                 </div>
 
-                <!-- 오른쪽: 링크 모음 -->
-                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-semibold p-6 text-gray-800 dark:text-gray-200">Links & Profiles</h3>
-                    <div class="space-y-6 p-6">
-                        <!-- GitHub -->
-                        <div class="flex items-start p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 cursor-pointer"
-                            @click="openLink(contactInfo.githubUrl)">
-                            <div
-                                class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fab fa-github text-lg text-gray-700 dark:text-gray-300"></i>
-                            </div>
-                            <div>
-                                <p class="font-medium text-gray-800 dark:text-gray-200">GitHub</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">프로젝트 소스 코드</p>
-                            </div>
-                        </div>
-
-                        <!-- LinkedIn -->
-                        <div class="flex items-start p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 cursor-pointer"
-                            @click="openLink(contactInfo.linkedinUrl)">
-                            <div
-                                class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fab fa-linkedin-in text-lg text-blue-600 dark:text-blue-400"></i>
-                            </div>
-                            <div>
-                                <p class="font-medium text-gray-800 dark:text-gray-200">LinkedIn</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">프로페셔널 네트워크</p>
-                            </div>
-                        </div>
-
-                        <!-- 네이버 블로그 -->
-                        <div class="flex items-start p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 cursor-pointer"
-                            @click="openLink(contactInfo.blogUrl)">
-                            <div
-                                class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-pencil-alt text-lg text-green-600 dark:text-green-400"></i>
-                            </div>
-                            <div>
-                                <p class="font-medium text-gray-800 dark:text-gray-200">네이버 블로그</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">개발 경험과 기술 공유</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -114,10 +70,7 @@ const props = defineProps({
         type: Object,
         default: () => ({
             email: 'ddpower6120@gmail.com',
-            kakaoUrl: 'https://open.kakao.com/o/s3KZK40g',
-            githubUrl: 'https://github.com/dodamking',
-            linkedinUrl: 'https://linkedin.com/in/6b0401231',
-            blogUrl: 'https://blog.naver.com/power6120'
+            kakaoUrl: 'https://open.kakao.com/o/s3KZK40g'
         })
     }
 });
