@@ -37,19 +37,15 @@
                             <ul class="space-y-3 text-gray-600 dark:text-gray-300">
                                 <li class="flex items-start">
                                     <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
-                                    <span>Modbus RTU·TCP 게이트웨이 기반 PDU·CDU 등 시설 자원 실시간 수집 파이프라인 단독 설계·구축</span>
+                                    <span>PDU·CDU·서버 GPU·CPU 데이터 Modbus(RTU·TCP) 실시간 수집 파이프라인 및 저장 DB 설계·구축</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
-                                    <span>PUE 등 데이터센터 운영 핵심 KPI 모니터링 시스템 개발 및 성능·안정성 운영 정책 의사결정 지원</span>
+                                    <span>데이터센터 운영 상태 실시간 모니터링 대시보드 개발 (PUE 등 핵심 지표 산출 포함)</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
-                                    <span>Kubernetes 기반 GPU·CPU 메트릭 수집 및 노드 부하 테스트 환경 구성</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="text-blue-500 dark:text-blue-400 mr-2">›</span>
-                                    <span>내부 네트워크·운영 인프라 구축 및 장비 협력사 기술 협의</span>
+                                    <span>시스템 구축에 필요한 내부 네트워크 등 인프라 구축</span>
                                 </li>
                             </ul>
                         </div>
@@ -110,19 +106,6 @@
                                     <span>MongoDB를 활용한 확장 가능한 데이터베이스 설계</span>
                                 </li>
                             </ul>
-                            <div class="mt-4">
-                                <div class="text-sm text-gray-500 dark:text-gray-400 mb-2">성과 및 규모:</div>
-                                <div class="flex flex-wrap gap-4">
-                                    <div class="flex items-center gap-2">
-                                        <i class="fas fa-users text-blue-500 dark:text-blue-400"></i>
-                                        <span class="text-sm text-gray-600 dark:text-gray-400">전사 임직원 활용</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i class="fas fa-check text-blue-500 dark:text-blue-400"></i>
-                                        <span class="text-sm text-gray-600 dark:text-gray-400">수기 문서 작업 자동화</span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- TMS -->
