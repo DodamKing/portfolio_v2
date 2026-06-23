@@ -1,7 +1,7 @@
 <!-- components/common/ScrollToTop.vue -->
 <template>
-    <button v-show="showButton" @click="scrollToTop" class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg 
-             hover:bg-blue-700 transition-all duration-300 z-50
+    <button v-show="showButton" @click="scrollToTop" class="fixed bottom-8 right-8 bg-amber text-charcoal p-3 rounded-full shadow-lg
+             hover:bg-amber-dark transition-all duration-300 z-50
              transform hover:-translate-y-1" aria-label="Scroll to top">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />

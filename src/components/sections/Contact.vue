@@ -1,23 +1,23 @@
 <template>
     <section id="contact"
-        class="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+        class="py-12 sm:py-20 px-4 sm:px-6 bg-paper dark:bg-charcoal">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-4 text-gray-900 dark:text-white">Contact</h2>
+            <h2 class="font-display text-3xl font-bold text-center mb-4 text-ink-light dark:text-ink-dark">Contact</h2>
             <p class="text-center text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-8 sm:mb-12">
                 새로운 기회나 프로젝트 의뢰 및 협업에 대해 이야기하고 싶으시다면 언제든 연락주세요.
             </p>
 
             <div class="max-w-2xl mx-auto">
                 <!-- 연락처 정보 -->
-                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg">
+                <div class="bg-white dark:bg-charcoal-light rounded-xl shadow-sm border border-ink-light/10 dark:border-ink-dark/10">
                     <h3 class="text-xl font-semibold p-6 text-gray-800 dark:text-gray-200">Contact Information</h3>
                     <div class="space-y-6 p-6">
                         <!-- 이메일 -->
                         <div
                             class="flex items-start p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200">
                             <div
-                                class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-envelope text-lg text-blue-600 dark:text-blue-400"></i>
+                                class="w-10 h-10 bg-amber/10 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-lg text-amber"></i>
                             </div>
                             <div>
                                 <p class="font-medium text-gray-800 dark:text-gray-200">Email</p>

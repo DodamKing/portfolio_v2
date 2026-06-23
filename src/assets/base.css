@@ -4,8 +4,8 @@
 
 /* 기본 스타일 */
 :root {
-    --primary: #3B82F6;
-    --primary-dark: #2563EB;
+    --primary: #E8A33D;
+    --primary-dark: #B97A1F;
 }
 
 body {
@@ -14,5 +14,5 @@ body {
 }
 
 #app {
-    font-family: 'Inter', sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
 }

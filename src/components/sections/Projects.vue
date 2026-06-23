@@ -1,8 +1,8 @@
 <template>
     <section id="projects"
-        class="py-12 sm:py-20 px-4 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+        class="py-12 sm:py-20 px-4 bg-paper-dim dark:bg-charcoal-light">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-4 text-gray-900 dark:text-white">Projects</h2>
+            <h2 class="font-display text-2xl sm:text-3xl font-bold text-center mb-4 text-ink-light dark:text-ink-dark">Projects</h2>
             <p class="text-center text-gray-600 dark:text-gray-400 mb-8 sm:mb-12">최근 진행한 주요 프로젝트입니다.</p>
 
             <!-- 모바일: 스와이프 캐러셀 -->
@@ -12,7 +12,7 @@
                     <div class="flex gap-4">
                         <div v-for="project in projects" :key="project.id"
                             :style="{ width: cardWidth + 'px' }"
-                            class="snap-start flex-shrink-0 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                            class="snap-start flex-shrink-0 bg-white dark:bg-charcoal rounded-lg shadow-sm border border-ink-light/10 dark:border-ink-dark/10 overflow-hidden">
                             <!-- 이미지 섹션 -->
                             <div class="relative overflow-hidden h-48 cursor-pointer"
                                 @click="showProjectDetails(project)">
@@ -21,20 +21,15 @@
                                 <div class="absolute inset-0 bg-black opacity-0 hover:opacity-20 transition-opacity">
                                 </div>
 
-                                <div class="absolute top-3 left-3">
-                                    <span :class="[
-                                        'text-xs px-3 py-1.5 rounded-full font-medium',
-                                        project.type === 'Work'
-                                            ? 'bg-blue-500 text-white'
-                                            : 'bg-purple-500 text-white'
-                                    ]">
-                                        {{ project.type }} Project
-                                    </span>
-                                </div>
-
                                 <div
-                                    class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/50 to-transparent">
-                                    <span class="text-sm text-white">{{ project.period }}</span>
+                                    class="absolute bottom-0 left-0 right-0 p-2 px-3 bg-gradient-to-t from-black/60 to-transparent flex items-center gap-2">
+                                    <span class="relative flex h-1.5 w-1.5">
+                                        <span v-if="project.liveLink" class="absolute inline-flex h-full w-full rounded-full bg-teal opacity-75 animate-ping"></span>
+                                        <span class="relative inline-flex h-1.5 w-1.5 rounded-full" :class="project.liveLink ? 'bg-teal' : 'bg-gray-400'"></span>
+                                    </span>
+                                    <span class="font-mono text-xs text-white tracking-wide">
+                                        {{ project.liveLink ? 'LIVE' : 'ARCHIVED' }} · REC#{{ String(project.id).padStart(2, '0') }} · {{ project.period }}
+                                    </span>
                                 </div>
                             </div>
 
@@ -44,7 +39,7 @@
                                         {{ project.title }}
                                     </h3>
                                     <span
-                                        class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
+                                        class="text-xs px-2 py-1 border border-amber/40 text-amber rounded-full">
                                         {{ project.category }}
                                     </span>
                                 </div>
@@ -68,12 +63,12 @@
                                     </button>
                                     <div class="flex gap-3">
                                         <a v-if="project.liveLink" :href="project.liveLink" target="_blank"
-                                            class="text-sm px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors"
+                                            class="text-sm px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-amber transition-colors"
                                             @click.stop>
                                             <i class="fas fa-external-link-alt"></i>
                                         </a>
                                         <a :href="project.githubLink" target="_blank"
-                                            class="text-sm px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors"
+                                            class="text-sm px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-amber transition-colors"
                                             @click.stop>
                                             <i class="fab fa-github"></i>
                                         </a>
@@ -88,7 +83,7 @@
                 <div class="flex justify-center mt-6 gap-2">
                     <div v-for="(_, index) in projects" :key="index"
                         class="w-2 h-2 rounded-full transition-all duration-300"
-                        :class="[currentSlide === index ? 'w-6 bg-blue-600' : 'bg-gray-300 dark:bg-gray-600']">
+                        :class="[currentSlide === index ? 'w-6 bg-amber' : 'bg-gray-300 dark:bg-gray-600']">
                     </div>
                 </div>
             </div>
@@ -97,26 +92,21 @@
             <div class="hidden md:block">
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                     <div v-for="project in displayedProjects" :key="project.id"
-                        class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
+                        class="bg-white dark:bg-charcoal rounded-lg shadow-sm border border-ink-light/10 dark:border-ink-dark/10 overflow-hidden group hover:border-amber/50 transition-all duration-300">
                         <div class="relative overflow-hidden h-48 cursor-pointer" @click="showProjectDetails(project)">
                             <img :src="project.image" :alt="project.title"
                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                             <div class="absolute inset-0 bg-black opacity-0 hover:opacity-20 transition-opacity"></div>
 
-                            <div class="absolute top-3 left-3">
-                                <span :class="[
-                                    'text-xs px-3 py-1.5 rounded-full font-medium',
-                                    project.type === 'Work'
-                                        ? 'bg-blue-500 text-white'
-                                        : 'bg-purple-500 text-white'
-                                ]">
-                                    {{ project.type }} Project
-                                </span>
-                            </div>
-
                             <div
-                                class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/50 to-transparent">
-                                <span class="text-sm text-white">{{ project.period }}</span>
+                                class="absolute bottom-0 left-0 right-0 p-2 px-3 bg-gradient-to-t from-black/60 to-transparent flex items-center gap-2">
+                                <span class="relative flex h-1.5 w-1.5">
+                                    <span v-if="project.liveLink" class="absolute inline-flex h-full w-full rounded-full bg-teal opacity-75 animate-ping"></span>
+                                    <span class="relative inline-flex h-1.5 w-1.5 rounded-full" :class="project.liveLink ? 'bg-teal' : 'bg-gray-400'"></span>
+                                </span>
+                                <span class="font-mono text-xs text-white tracking-wide">
+                                    {{ project.liveLink ? 'LIVE' : 'ARCHIVED' }} · REC#{{ String(project.id).padStart(2, '0') }} · {{ project.period }}
+                                </span>
                             </div>
                         </div>
 
@@ -126,7 +116,7 @@
                                     {{ project.title }}
                                 </h3>
                                 <span
-                                    class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
+                                    class="text-xs px-2 py-1 border border-amber/40 text-amber rounded-full">
                                     {{ project.category }}
                                 </span>
                             </div>
@@ -150,12 +140,12 @@
                                 </button>
                                 <div class="flex gap-3">
                                     <a v-if="project.liveLink" :href="project.liveLink" target="_blank"
-                                        class="text-sm px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors"
+                                        class="text-sm px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-amber transition-colors"
                                         @click.stop>
                                         <i class="fas fa-external-link-alt"></i>
                                     </a>
                                     <a :href="project.githubLink" target="_blank"
-                                        class="text-sm px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors"
+                                        class="text-sm px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-amber transition-colors"
                                         @click.stop>
                                         <i class="fab fa-github"></i>
                                     </a>
@@ -212,7 +202,7 @@
                     </div>
 
                     <!-- 프로젝트 설명 -->
-                    <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
+                    <div class="bg-paper-dim dark:bg-charcoal-light rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
                         <p class="whitespace-pre-line text-sm sm:text-base text-gray-600 dark:text-gray-300">
                             {{ selectedProject.fullDescription }}
                         </p>
@@ -221,29 +211,29 @@
                     <!-- 주요 기능 & 사용 기술 -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 mb-6 sm:mb-8">
                         <!-- 주요 기능 -->
-                        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-sm">
+                        <div class="bg-white dark:bg-charcoal rounded-xl p-4 sm:p-6 shadow-sm border border-ink-light/10 dark:border-ink-dark/10">
                             <h4 class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2">
-                                <i class="fas fa-list text-blue-600"></i>
+                                <i class="fas fa-list text-amber"></i>
                                 주요 기능
                             </h4>
                             <ul class="space-y-2 sm:space-y-3">
                                 <li v-for="feature in selectedProject.features" :key="feature"
                                     class="flex items-start text-sm sm:text-base">
-                                    <span class="text-blue-500 mr-2">›</span>
+                                    <span class="text-teal mr-2">›</span>
                                     <span>{{ feature }}</span>
                                 </li>
                             </ul>
                         </div>
 
                         <!-- 사용 기술 -->
-                        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-sm">
+                        <div class="bg-white dark:bg-charcoal rounded-xl p-4 sm:p-6 shadow-sm border border-ink-light/10 dark:border-ink-dark/10">
                             <h4 class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2">
-                                <i class="fas fa-code text-blue-600"></i>
+                                <i class="fas fa-code text-amber"></i>
                                 사용 기술
                             </h4>
                             <div class="flex flex-wrap gap-2">
                                 <span v-for="tech in selectedProject.technologies" :key="tech"
-                                    class="px-2 sm:px-3 py-1 sm:py-1.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full text-xs sm:text-sm">
+                                    class="px-2 sm:px-3 py-1 sm:py-1.5 font-mono border border-teal/40 text-teal-dark dark:text-teal rounded-full text-xs sm:text-sm">
                                     {{ tech }}
                                 </span>
                             </div>
@@ -253,12 +243,12 @@
                     <!-- 버튼 그룹 -->
                     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6 border-t dark:border-gray-700">
                         <a v-if="selectedProject.liveLink" :href="selectedProject.liveLink" target="_blank"
-                            class="flex-1 flex items-center justify-center gap-2 px-4 sm:px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base">
+                            class="flex-1 flex items-center justify-center gap-2 px-4 sm:px-6 py-3 bg-amber text-charcoal font-medium rounded-lg hover:bg-amber-dark hover:text-paper transition-colors text-sm sm:text-base">
                             <i class="fas fa-external-link-alt"></i>
                             Live
                         </a>
                         <a :href="selectedProject.githubLink" target="_blank"
-                            class="flex-1 flex items-center justify-center gap-2 px-4 sm:px-6 py-3 border border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors text-sm sm:text-base">
+                            class="flex-1 flex items-center justify-center gap-2 px-4 sm:px-6 py-3 border border-teal text-teal-dark dark:text-teal rounded-lg hover:bg-teal/10 transition-colors text-sm sm:text-base">
                             <i class="fab fa-github"></i>
                             GitHub
                         </a>

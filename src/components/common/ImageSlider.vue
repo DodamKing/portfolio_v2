@@ -40,7 +40,7 @@
             <button v-for="(_, index) in images" :key="index" @click="goToIndex(index)"
                 class="w-2 h-2 rounded-full transition-all" :class="[
                     currentIndex === index
-                        ? 'bg-blue-600 w-4'
+                        ? 'bg-amber w-4'
                         : 'bg-gray-300 hover:bg-gray-400'
                 ]" :aria-label="`Go to image ${index + 1}`" />
         </div>

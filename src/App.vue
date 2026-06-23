@@ -1,8 +1,8 @@
 <template>
-	<div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+	<div class="min-h-screen bg-paper dark:bg-charcoal">
 		<!-- 다크모드 토글 버튼 -->
 		<button @click="toggleDarkMode"
-			class="fixed top-4 right-4 z-50 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white">
+			class="fixed top-4 right-4 z-50 p-2 rounded-lg bg-paper-dim dark:bg-charcoal-light text-ink-light dark:text-ink-dark">
 			<span v-if="isDark">🌞</span>
 			<span v-else>🌙</span>
 		</button>
