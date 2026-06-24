@@ -1,84 +1,48 @@
+<!-- components/sections/Skills.vue : 도메인 전문성 + 기술 스택 -->
 <template>
-    <section id="skills" class="py-20 px-4 bg-paper dark:bg-charcoal">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="font-display text-3xl font-bold text-center mb-4 text-ink-light dark:text-ink-dark">Technical Skills</h2>
-            <p class="text-center text-gray-600 dark:text-gray-400 mb-12">프로젝트에 실제 활용한 기술 스택입니다</p>
+    <section id="skills" class="py-20 sm:py-28 px-5 sm:px-8 lg:px-12 bg-paper-dim dark:bg-charcoal-light">
+        <div class="max-w-5xl mx-auto">
+            <!-- 섹션 헤더 -->
+            <p class="font-mono text-xs tracking-[0.25em] text-teal-dark dark:text-teal">// SKILLS</p>
+            <h2 class="mt-4 font-display font-extrabold tracking-tightest text-ink-light dark:text-ink-dark text-3xl sm:text-4xl lg:text-5xl">
+                도메인과 기술
+            </h2>
+            <p class="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-ink-light/60 dark:text-ink-dark/60">
+                프로젝트에서 실제로 다뤄온 것들입니다.
+            </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Development Stack -->
-                <div class="bg-white dark:bg-charcoal-light rounded-xl p-6 shadow-sm border border-ink-light/10 dark:border-ink-dark/10">
-                    <h3 class="text-xl font-semibold mb-6 text-amber flex items-center gap-2">
-                        <i class="fas fa-code"></i>
-                        Development
-                    </h3>
-
-                    <!-- Backend -->
-                    <div class="mb-6">
-                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Backend</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <span :class="skillTagClasses">Node.js</span>
-                            <span :class="skillTagClasses">Express.js</span>
-                            <span :class="skillTagClasses">Java</span>
-                            <span :class="skillTagClasses">Spring</span>
-                            <span :class="skillTagClasses">Python</span>
-                            <span :class="skillTagClasses">Flask</span>
-                            <span :class="skillTagClasses">FastAPI</span>
-                            <span :class="skillTagClasses">Supabase</span>
-                        </div>
+            <!-- Domain Expertise (전면 강조) -->
+            <p class="mt-12 font-mono text-[11px] tracking-[0.22em] text-ink-light/45 dark:text-ink-dark/45">
+                DOMAIN EXPERTISE
+            </p>
+            <div class="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div v-for="d in domains" :key="d.name"
+                    class="rounded-xl border border-ink-light/10 dark:border-ink-dark/10 bg-paper dark:bg-charcoal
+                    px-4 py-3.5 transition-colors hover:border-amber/45">
+                    <div class="flex items-center gap-2.5">
+                        <i :class="d.icon" class="text-amber-dark dark:text-amber"></i>
+                        <p class="font-semibold text-sm text-ink-light dark:text-ink-dark">{{ d.name }}</p>
                     </div>
-
-                    <!-- Frontend -->
-                    <div class="mb-6">
-                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Frontend</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <span :class="skillTagClasses">Vue.js</span>
-                            <span :class="skillTagClasses">React</span>
-                            <span :class="skillTagClasses">Flutter</span>
-                        </div>
-                    </div>
-
-                    <!-- Database -->
-                    <div>
-                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Database</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <span :class="skillTagClasses">MySQL</span>
-                            <span :class="skillTagClasses">MongoDB</span>
-                            <span :class="skillTagClasses">MariaDB</span>
-                            <span :class="skillTagClasses">PostgreSQL</span>
-                            <span :class="skillTagClasses">Hive</span>
-                        </div>
-                    </div>
+                    <p class="mt-1.5 font-mono text-[11px] tracking-wide text-ink-light/45 dark:text-ink-dark/45">
+                        {{ d.tag }}
+                    </p>
                 </div>
+            </div>
 
-                <!-- Infrastructure & Tools -->
-                <div class="bg-white dark:bg-charcoal-light rounded-xl p-6 shadow-sm border border-ink-light/10 dark:border-ink-dark/10">
-                    <h3 class="text-xl font-semibold mb-6 text-amber flex items-center gap-2">
-                        <i class="fas fa-server"></i>
-                        Infrastructure & Tools
-                    </h3>
-
-                    <!-- Domain Expertise -->
-                    <div class="mb-6">
-                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Domain Expertise</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <span :class="skillTagClasses">의료정보시스템</span>
-                            <span :class="skillTagClasses">ERP</span>
-                            <span :class="skillTagClasses">실시간 데이터 파이프라인</span>
-                            <span :class="skillTagClasses">태양광 관제 시스템 (EMS)</span>
-                            <span :class="skillTagClasses">AI 데이터센터 열관리 시스템 (TMS)</span>
-                        </div>
-                    </div>
-
-                    <!-- Cloud & DevOps -->
-                    <div>
-                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Cloud & DevOps</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <span :class="skillTagClasses">AWS</span>
-                            <span :class="skillTagClasses">NCP</span>
-                            <span :class="skillTagClasses">Docker</span>
-                            <span :class="skillTagClasses">Nginx</span>
-                            <span :class="skillTagClasses">Modbus</span>
-                        </div>
+            <!-- Tech Stack (보조, 스캔용) -->
+            <p class="mt-12 font-mono text-[11px] tracking-[0.22em] text-ink-light/45 dark:text-ink-dark/45">
+                TECH STACK
+            </p>
+            <div class="mt-4 grid sm:grid-cols-2 gap-x-10 gap-y-6">
+                <div v-for="g in stack" :key="g.label">
+                    <p class="text-sm font-medium text-ink-light/70 dark:text-ink-dark/70 mb-2.5">{{ g.label }}</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span v-for="t in g.items" :key="t"
+                            class="font-mono text-xs px-2.5 py-1 rounded-md border border-ink-light/15 dark:border-ink-dark/15
+                            text-ink-light/65 dark:text-ink-dark/65 hover:border-amber/50 hover:text-amber-dark dark:hover:text-amber
+                            transition-colors cursor-default">
+                            {{ t }}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -86,26 +50,19 @@
     </section>
 </template>
 
-
 <script setup>
-import { computed } from 'vue'
+const domains = [
+    { name: '의료영상 정보 시스템', tag: 'PACS · 피부과·성형외과', icon: 'fas fa-x-ray' },
+    { name: 'ERP 시스템', tag: '구매 · 자재 · 자산', icon: 'fas fa-boxes-stacked' },
+    { name: '데이터 파이프라인', tag: '수집 · 연동 · 크롤링', icon: 'fas fa-diagram-project' },
+    { name: '태양광 발전 관제', tag: 'EMS · Huawei 인버터·SmartLogger · API 연동', icon: 'fas fa-solar-panel' },
+    { name: 'AI 데이터센터 열관리', tag: 'TMS · GPU·CDU·PDU · Modbus · PUE', icon: 'fas fa-temperature-half' },
+]
 
-const skillTagClasses = computed(() => [
-    'px-3',
-    'py-1.5',
-    'font-mono',
-    'text-xs',
-    'tracking-wide',
-    'text-ink-light/70',
-    'dark:text-ink-dark/70',
-    'border',
-    'border-ink-light/15',
-    'dark:border-ink-dark/15',
-    'rounded-md',
-    'transition-colors',
-    'duration-200',
-    'cursor-default',
-    'hover:border-amber',
-    'hover:text-amber'
-])
+const stack = [
+    { label: 'Backend', items: ['Node.js', 'Express.js', 'Java', 'Spring', 'Python', 'Flask', 'FastAPI', 'Supabase', 'JWT', 'OAuth'] },
+    { label: 'Frontend', items: ['Vue.js', 'Nuxt.js', 'React', 'Flutter', 'TailwindCSS', 'Vite'] },
+    { label: 'Database', items: ['MySQL', 'MongoDB', 'PostgreSQL', 'Redis'] },
+    { label: 'Cloud & DevOps', items: ['AWS', 'NCP', 'Docker', 'Nginx', 'PM2'] },
+]
 </script>
