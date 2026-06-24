@@ -7,6 +7,123 @@ const getScreenshots = (images) => images.map(img => getImageUrl(img))
 
 export const projects = [
     {
+        id: 10,
+        title: 'autoGOM',
+        type: 'Personal',
+        category: 'Payment SaaS',
+        platform: 'web',
+        period: '2026.04 - 현재',
+        shortDescription: 'K-POP 공동구매 주최자를 위한 결제 자동화 SaaS',
+        fullDescription: `
+            K-POP 공동구매(GO)를 운영하는 주최자(GOM)의 가장 큰 고통 —
+            참여자 결제를 일일이 대조하고, 송장을 하나씩 보내고, DM에 시달리는 일 —
+            을 자동화하는 SaaS입니다. 도메인(autogom.app)부터 시장 조사·출시까지 1인으로 끌고 왔습니다.
+
+            핵심은 결제 자동화입니다.
+            • PayPal Invoicing API + 웹훅으로 참여자 결제를 주문에 자동 매칭 (수동 대조 0)
+            • Goods & Services 기반 구매자 보호, 환불·취소 흐름 처리
+            • 주문·배송·트래킹 관리 + 참여자용 트래킹 페이지
+            • PayPal 수수료를 국가별로 계산해 참여자 인보이스에 반영하는 정산 로직
+
+            Next.js(서버 액션·route handler) + Supabase(Postgres·RLS) + PayPal로
+            프론트부터 결제·DB·인증·메일까지 직접 구축했고,
+            봇 차단·rate limit·법적 문서(ToS/Privacy)·SEO까지 실서비스 운영 관점으로 만들었습니다.
+        `,
+        image: getImageUrl('autogom/main.png'),
+        screenshots: getScreenshots([
+            'autogom/main.png',
+            'autogom/1.png',
+            'autogom/2.png',
+            'autogom/3.png',
+        ]),
+        technologies: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'PayPal API', 'Resend', 'Tailwind CSS', 'Vercel'],
+        features: [
+            'PayPal Invoicing + 웹훅으로 참여자 결제 → 주문 자동 매칭',
+            'Goods & Services 구매자 보호 · 환불/취소 처리',
+            '주문·배송·트래킹 관리 + 참여자 트래킹 페이지',
+            'PayPal 수수료 국가별 자동 정산 (참여자 인보이스 반영)',
+            'Supabase RLS 보안 · 봇 차단 · rate limit',
+        ],
+        liveLink: 'https://autogom.app/',
+    },
+    {
+        id: 9,
+        title: '코디캣',
+        type: 'Personal',
+        category: 'AI Shopping',
+        platform: 'web',
+        period: '2026.06 - 현재',
+        shortDescription: 'SNS 코디 사진 한 장으로 옷 아이템을 찾아주는 AI 쇼핑 서비스',
+        fullDescription: `
+            SNS에서 본 코디 사진 한 장을 올리면, AI가 옷 아이템을 분리해
+            네이버 쇼핑에서 비슷한 스타일의 상품을 일괄로 찾아주는 서비스입니다. 한국·모바일 전용.
+
+            사진 업로드 → Gemini가 이미지에서 아이템(상의·하의·신발 등)을 추출 →
+            아이템별로 네이버 쇼핑을 검색해 상품 카드로 제공합니다.
+
+            Next.js 단일 스택으로 앱과 API(route handler)를 통합해 직접 구축했습니다.
+            • Gemini(Vision)로 이미지 → 의류 아이템 추출, 네이버 쇼핑 API 연동
+            • 이미지 해시(SHA-256) 캐싱으로 동일 사진 재요청 시 AI 재호출 0 (비용 절감)
+            • 봇·남용 차단: Origin 게이트·매직바이트 검증·rate limit (개인/전체 예산 분리)
+            • 결과 영속화 + 공유 페이지(/result/[id]), Neon(Postgres) + Drizzle
+            • 네이버 검색 노출(SEO)·업로드 이미지 다운스케일 등 실서비스 운영 고려
+
+            개인 프로젝트지만 AI 연동부터 비용·남용·배포까지 실제 운영 관점으로 만들었습니다.
+        `,
+        image: getImageUrl('codicat/main.png'),
+        screenshots: getScreenshots([
+            'codicat/main.png',
+            'codicat/1.jpg',
+            'codicat/2.jpg',
+        ]),
+        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Gemini API', '네이버 쇼핑 API', 'Neon (Postgres)', 'Drizzle ORM', 'Netlify'],
+        features: [
+            'AI(Gemini) 기반 코디 사진 → 의류 아이템 추출',
+            '아이템별 네이버 쇼핑 "비슷한 스타일" 상품 검색',
+            '이미지 해시 캐싱으로 AI 호출 비용 절감',
+            '봇·남용 차단 (Origin 게이트·rate limit)',
+            '결과 영속화 + 공유 링크',
+        ],
+        liveLink: 'https://codicat.dimad.kr/',
+    },
+    {
+        id: 8,
+        title: 'WithU',
+        type: 'Personal',
+        category: 'Couple Schedule App',
+        platform: 'mobile',
+        period: '2025.03 - 현재',
+        shortDescription: '두 사람이 일정을 공유·조율하는 Flutter 커플 앱',
+        fullDescription: `
+            두 사람이 일정을 공유하고, 겹치는 시간과 빈 시간을 한눈에 파악하는
+            Flutter 기반 커플 일정 앱입니다. 실제로 매일 사용하며 지속적으로 운영·개선하고 있습니다.
+
+            Flutter + Firebase로 클라이언트부터 서버까지 직접 구축했습니다.
+            • Firestore 실시간 동기화(StreamBuilder)로 두 기기 간 일정 즉시 반영
+            • Cloud Functions 기반 푸시 알림 — 일정 추가/수정/삭제·댓글·매일 아침 일정 요약
+            • Google Calendar 양방향 동기화 (기기별 이벤트 추적 구조 직접 설계)
+            • Firestore 보안 규칙, FCM 토큰 생명주기 관리, GitHub Actions 자동 배포(CI/CD)
+
+            규모는 2인용이지만, 운영하며 마주친 문제들 — 타임존 경계 버그,
+            삭제·수정 race condition, cold start 알림 처리 — 을 직접 디버깅하고 안정화했습니다.
+        `,
+        image: getImageUrl('withu/main.jpg'),
+        screenshots: getScreenshots([
+            'withu/main.jpg',
+            'withu/1.jpg',
+            'withu/2.jpg',
+        ]),
+        technologies: ['Flutter', 'Dart', 'Firebase Firestore', 'Cloud Functions', 'FCM', 'Google Calendar API', 'Material 3', 'GitHub Actions'],
+        features: [
+            '두 기기 간 일정 실시간 동기화 (Firestore StreamBuilder)',
+            '홈 / 달력 / 주간 3개 뷰 — 겹치는 시간·빈 시간 파악',
+            'Cloud Functions 푸시 알림 (일정·댓글·일일 요약)',
+            'Google Calendar 양방향 동기화',
+            '일정 댓글 기능',
+            'GitHub Actions 자동 배포 (CI/CD)',
+        ],
+    },
+    {
         id: 7,
         title: '프로틴프라이스',
         type: 'Personal',
@@ -283,9 +400,6 @@ export const projects = [
             
             JSP와 Spring Framework를 기반으로 개발되었으며,
             사용자별 플레이리스트 기능으로 개인화된 음악 경험을 제공합니다.
-
-            * 서버가 불안정 하여 접속이 잘 안될 수 있습니다.
-            * 모바일 대응이 전혀 되어 있지 않아 pc에서 접속하길 권합니다
         `,
         image: getImageUrl('ddmusic.png'),
         screenshots: getScreenshots([
@@ -301,7 +415,6 @@ export const projects = [
             '플레이리스트 관리',
             '게시판',
         ],
-        liveLink: 'http://49.142.157.251:9090/cjs2108_kdd',
         githubLink: 'https://github.com/DodamKing/DDMusic'
     }
 ];
